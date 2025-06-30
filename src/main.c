@@ -1,7 +1,5 @@
 
-#include "../includes/window.h"
-#include <stdlib.h>
-#include <unistd.h>
+#include "../includes/general.h"
 
 int main(void)
 {
