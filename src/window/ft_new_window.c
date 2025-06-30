@@ -18,5 +18,5 @@ void new_window(t_window *window)
         write(2, "Error: mlx_new_window failed\n", 30);
         exit(1);
     }
-    
+
 }

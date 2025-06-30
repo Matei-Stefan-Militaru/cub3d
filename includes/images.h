@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   general.h                                          :+:      :+:    :+:   */
+/*   images.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/30 21:22:10 by pmorello          #+#    #+#             */
-/*   Updated: 2025/06/30 22:25:07 by pmorello         ###   ########.fr       */
+/*   Created: 2025/06/30 21:30:16 by pmorello          #+#    #+#             */
+/*   Updated: 2025/06/30 22:09:06 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GENERAL_H
-#define GENERAL_H
+#ifndef IMAGES_H
+#define IMAGES_H
 
 #include "../mlx/mlx.h"
-#include "../libft/libft.h"
-#include "images.h"
-#include "window.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "../includes/window.h"
 
+typedef struct s_image
+{
+    void    *image;
+    int     x;
+    int     y;
+
+    t_window *win;
+    
+} t_image;
+
+void    ft_add_images(t_image *image);
+void    ft_load_image(t_image *image);
 
 #endif

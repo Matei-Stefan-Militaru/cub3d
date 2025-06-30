@@ -7,6 +7,7 @@ int main(void)
     
     w = (t_window *)malloc(sizeof(t_window));
     new_window(w);
+    //ft_add_images(w->img);
     mlx_loop(w->mlx);
 
     return (0);
