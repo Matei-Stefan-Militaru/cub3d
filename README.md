@@ -1,170 +1,255 @@
 # cub3d
 
-Estructura del proyecto cub3D
-Archivos principales
+# cub3D - My first RayCaster with miniLibX
+
+A 3D maze game built using raycasting techniques and the miniLibX graphics library. This project creates a realistic first-person perspective view of a maze, similar to classic games like Wolfenstein 3D.
+
+## 📋 Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Map Format](#map-format)
+- [Controls](#controls)
+- [Technical Details](#technical-details)
+- [Screenshots](#screenshots)
+
+## 🎯 Overview
+
+cub3D is a project from the 42 School curriculum that introduces students to raycasting, a rendering technique used to create 3D-like graphics in 2D environments. The program reads a scene description file (.cub) and renders a first-person view of a maze with textured walls, colored floors, and ceilings.
+
+## ✨ Features
+
+- **3D Raycasting Engine**: Real-time 3D rendering using raycasting algorithms
+- **Textured Walls**: Different textures for each wall direction (North, South, East, West)
+- **Colored Surfaces**: Customizable floor and ceiling colors
+- **Smooth Movement**: Fluid player movement and rotation
+- **Collision Detection**: Prevents walking through walls
+- **Window Management**: Proper window handling with clean exit options
+
+## 📁 Project Structure
+
+```
 cub3D/
 ├── Makefile
+├── README.md
 ├── includes/
-│   ├── cub3d.h          # Header principal que incluye todos
-│   ├── parsing.h        # Parsing y validación
-│   ├── render.h         # Renderizado y raycasting
-│   ├── player.h         # Movimiento del jugador
-│   ├── window.h         # Gestión de ventana
-│   └── utils.h          # Utilidades generales
+│   ├── cub3d.h          # Main header file
+│   ├── parsing.h        # Parsing and validation
+│   ├── render.h         # Rendering and raycasting
+│   ├── player.h         # Player movement
+│   ├── window.h         # Window management
+│   └── utils.h          # General utilities
 ├── src/
-│   ├── main.c
-│   ├── parsing/
-│   ├── render/
-│   ├── player/
-│   ├── window/
-│   └── utils/
-├── maps/
-└── textures/
-Módulos detallados
-1. PARSING (src/parsing/)
-Responsabilidad: Leer, validar y procesar el archivo .cub
-parsing/
-├── parse_file.c         # Función principal de parsing
-├── parse_textures.c     # Procesar texturas (NO, SO, WE, EA)
-├── parse_colors.c       # Procesar colores (F, C)
-├── parse_map.c          # Procesar y validar mapa
-├── validate_map.c       # Validar que el mapa esté cerrado
-└── parse_utils.c        # Utilidades de parsing (split, trim, etc.)
-Funciones clave:
+│   ├── main.c           # Entry point
+│   ├── parsing/         # File parsing and validation
+│   │   ├── parse_file.c
+│   │   ├── parse_textures.c
+│   │   ├── parse_colors.c
+│   │   ├── parse_map.c
+│   │   ├── validate_map.c
+│   │   └── parse_utils.c
+│   ├── render/          # Raycasting and rendering
+│   │   ├── render.c
+│   │   ├── raycasting.c
+│   │   ├── draw_walls.c
+│   │   ├── draw_floor_ceiling.c
+│   │   ├── textures.c
+│   │   └── render_utils.c
+│   ├── player/          # Player movement and rotation
+│   │   ├── player.c
+│   │   ├── movement.c
+│   │   ├── rotation.c
+│   │   └── collision.c
+│   ├── window/          # Window and event management
+│   │   ├── window.c
+│   │   ├── events.c
+│   │   └── hooks.c
+│   └── utils/           # General utilities
+│       ├── error.c
+│       ├── memory.c
+│       ├── math_utils.c
+│       └── string_utils.c
+├── maps/                # Example map files
+│   ├── basic.cub
+│   ├── complex.cub
+│   └── test.cub
+├── textures/            # Wall texture files
+│   ├── north_wall.xpm
+│   ├── south_wall.xpm
+│   ├── east_wall.xpm
+│   └── west_wall.xpm
+└── libft/               # Custom C library (if used)
+```
 
-parse_cub_file() - Función principal
-parse_texture_line() - Procesar líneas de texturas
-parse_color_line() - Procesar líneas de colores
-parse_map_section() - Extraer el mapa
-validate_map_walls() - Verificar que esté cerrado
-find_player_position() - Encontrar posición inicial del jugador
+## 🚀 Installation
 
-2. RENDER (src/render/)
-Responsabilidad: Raycasting y renderizado de la escena 3D
-render/
-├── render.c             # Función principal de renderizado
-├── raycasting.c         # Algoritmo de raycasting
-├── draw_walls.c         # Dibujar paredes con texturas
-├── draw_floor_ceiling.c # Dibujar suelo y techo
-├── textures.c           # Gestión de texturas
-└── render_utils.c       # Utilidades de renderizado
-Funciones clave:
+### Prerequisites
 
-render_frame() - Renderizar un frame completo
-cast_rays() - Lanzar rayos desde el jugador
-calculate_wall_distance() - Calcular distancia a la pared
-draw_wall_slice() - Dibujar una columna de pared
-get_texture_pixel() - Obtener pixel de textura
-draw_floor_ceiling() - Rellenar suelo y techo
+- GCC compiler
+- Make
+- miniLibX library
+- Math library (-lm)
 
-3. PLAYER (src/player/)
-Responsabilidad: Movimiento y rotación del jugador
-player/
-├── player.c             # Gestión general del jugador
-├── movement.c           # Movimiento (W, A, S, D)
-├── rotation.c           # Rotación (flechas izq/der)
-└── collision.c          # Detección de colisiones
-Funciones clave:
+### Build Instructions
 
-init_player() - Inicializar jugador
-move_player_forward() - Mover hacia adelante
-move_player_backward() - Mover hacia atrás
-strafe_left() - Moverse lateralmente
-strafe_right() - Moverse lateralmente
-rotate_left() - Girar a la izquierda
-rotate_right() - Girar a la derecha
-check_collision() - Verificar colisiones con paredes
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/cub3D.git
+cd cub3D
+```
 
-4. WINDOW (src/window/)
-Responsabilidad: Gestión de ventana y eventos
-window/
-├── window.c             # Inicialización y gestión de ventana
-├── events.c             # Manejo de eventos del teclado/ratón
-└── hooks.c              # Hooks de minilibX
-Funciones clave:
+2. Compile the project:
+```bash
+make
+```
 
-init_window() - Crear ventana
-setup_hooks() - Configurar eventos
-key_press_handler() - Manejar teclas presionadas
-key_release_handler() - Manejar teclas soltadas
-close_window() - Cerrar ventana limpiamente
-loop_hook() - Hook del bucle principal
+3. For bonus features (if implemented):
+```bash
+make bonus
+```
 
-5. UTILS (src/utils/)
-Responsabilidad: Utilidades generales
-utils/
-├── error.c              # Gestión de errores
-├── memory.c             # Gestión de memoria
-├── math_utils.c         # Funciones matemáticas
-└── string_utils.c       # Utilidades de strings
-Funciones clave:
+## 🎮 Usage
 
-error_exit() - Salir con error
-free_all() - Liberar toda la memoria
-ft_split_whitespace() - Split por espacios
-deg_to_rad() - Conversión de grados a radianes
-normalize_angle() - Normalizar ángulos
+Run the program with a valid .cub map file:
 
-Estructura de datos principal
-ctypedef struct s_game {
-    // Ventana y renderizado
-    void        *mlx;
-    void        *win;
-    void        *img;
-    char        *addr;
-    int         bits_per_pixel;
-    int         line_length;
-    int         endian;
-    
-    // Jugador
-    t_player    player;
-    
-    // Mapa y texturas
-    t_map       map;
-    t_textures  textures;
-    
-    // Colores
-    int         floor_color;
-    int         ceiling_color;
-    
-    // Estado del juego
-    int         keys[256];
+```bash
+./cub3D maps/basic.cub
+```
+
+### Example .cub file format:
+
+```
+NO ./textures/north_wall.xpm
+SO ./textures/south_wall.xpm  
+WE ./textures/west_wall.xpm
+EA ./textures/east_wall.xpm
+
+F 220,100,0
+C 225,30,0
+
+        1111111111111111111111111
+        1000000000110000000000001
+        1011000001110000000000001
+        1001000000000000000000001
+111111111011000001110000000000001
+100000000011000001110111111111111
+11110111111111011100000010001
+11110111111111011101010010001
+11000000110101011100000010001
+10000000000000001100000010001
+10000000000000001101010010001
+11000001110101011111011110N0111
+11110111 1110101 101111010001
+11111111 1111111 111111111111
+```
+
+## 🗺️ Map Format
+
+### Texture Identifiers:
+- `NO` - North wall texture path
+- `SO` - South wall texture path  
+- `WE` - West wall texture path
+- `EA` - East wall texture path
+
+### Color Identifiers:
+- `F` - Floor color (R,G,B format, range 0-255)
+- `C` - Ceiling color (R,G,B format, range 0-255)
+
+### Map Characters:
+- `0` - Empty space (walkable)
+- `1` - Wall
+- `N`, `S`, `E`, `W` - Player starting position and orientation
+
+### Map Rules:
+- Map must be surrounded by walls
+- Only one player starting position allowed
+- Map must be the last element in the file
+- Spaces are valid and handled as empty areas
+
+## 🎮 Controls
+
+| Key | Action |
+|-----|--------|
+| `W` | Move forward |
+| `S` | Move backward |
+| `A` | Strafe left |
+| `D` | Strafe right |
+| `←` | Look left |
+| `→` | Look right |
+| `ESC` | Exit game |
+
+## 🔧 Technical Details
+
+### Raycasting Algorithm
+The raycasting engine works by:
+1. Casting rays from the player's position in the viewing direction
+2. Calculating intersections with walls using DDA (Digital Differential Analyzer)
+3. Determining wall height based on distance
+4. Applying appropriate textures based on wall orientation
+5. Rendering floor and ceiling colors
+
+### Key Data Structures
+
+```c
+typedef struct s_game {
+    void        *mlx;           // MinilibX instance
+    void        *win;           // Window pointer
+    void        *img;           // Image buffer
+    t_player    player;         // Player data
+    t_map       map;            // Map data
+    t_textures  textures;       // Wall textures
+    int         floor_color;    // Floor RGB color
+    int         ceiling_color;  // Ceiling RGB color
+    int         keys[256];      // Key states
 } t_game;
-Flujo principal del programa
+```
 
-main.c:
+### Performance Optimizations
+- Efficient DDA algorithm for ray-wall intersections
+- Texture mapping with proper scaling
+- Minimal memory allocations during runtime
+- Optimized rendering loop
 
-Validar argumentos
-Parsear archivo .cub
-Inicializar MLX y ventana
-Configurar hooks
-Iniciar bucle principal
+## 🖼️ Screenshots
 
+*Add screenshots of your game in action here*
 
-Bucle principal:
+## 🧪 Testing
 
-Procesar input del usuario
-Actualizar posición del jugador
-Renderizar frame
-Mostrar en pantalla
+The project includes comprehensive error handling for:
+- Invalid map configurations
+- Missing texture files
+- Malformed .cub files
+- Memory allocation failures
+- Invalid color values
 
+## 📚 Learning Outcomes
 
+This project teaches:
+- **Computer Graphics**: Understanding of 2D to 3D projection
+- **Raycasting**: Implementation of classic rendering techniques
+- **Event Handling**: Real-time input processing
+- **Memory Management**: Proper allocation and deallocation
+- **File Parsing**: Robust input validation and processing
+- **Modular Programming**: Clean code organization and architecture
 
-Ventajas de esta estructura
+## 🤝 Contributing
 
-Separación de responsabilidades: Cada módulo tiene una función específica
-Mantenibilidad: Fácil de debuggear y modificar
-Escalabilidad: Fácil añadir nuevas características
-Testabilidad: Cada módulo se puede testear independientemente
-Legibilidad: Código organizado y fácil de entender
+This project is part of the 42 School curriculum. If you're a fellow student, feel free to discuss approaches and share insights, but remember to follow your school's collaboration policies.
 
-Headers organization
+## 📄 License
 
-cub3d.h: Include principal que importa todos los demás headers
-parsing.h: Estructuras y funciones de parsing
-render.h: Estructuras y funciones de renderizado
-player.h: Estructuras y funciones del jugador
-window.h: Funciones de ventana y eventos
-utils.h: Utilidades generales
+This project is for educational purposes as part of the 42 School curriculum.
 
-Esta estructura te permitirá tener un código limpio, modular y fácil de mantener.
+## 🙏 Acknowledgments
+
+- 42 School for the project specifications
+- The creators of miniLibX library
+- Classic games like Wolfenstein 3D for inspiration
+
+---
+
+**Note**: This project was developed as part of the 42 School curriculum. The goal is to understand fundamental computer graphics concepts through hands-on implementation.
