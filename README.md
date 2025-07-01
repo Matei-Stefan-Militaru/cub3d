@@ -1,5 +1,7 @@
 # cub3d
 
+https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
+
 # cub3D - My first RayCaster with miniLibX
 
 A 3D maze game built using raycasting techniques and the miniLibX graphics library. This project creates a realistic first-person perspective view of a maze, similar to classic games like Wolfenstein 3D.
