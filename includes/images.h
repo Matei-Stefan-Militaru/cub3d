@@ -18,11 +18,11 @@
 
 typedef struct s_image
 {
-    void    *image;
-    int     x;
-    int     y;
-
-    t_window *win;
+    void    *image; //puntero para refernciar la imagen
+    int     *p_colors; //(pixel_colors) puntero para escribir los colores de los pixeles
+    int     b_pixel; // (bits_pixel) para saber como construir un pixel
+    int     size_line; //sirve para navegar por el buffer de pixel_colors
+    int     endian; // define el orden de cada byte para cada pixel
     
 } t_image;
 

@@ -1,7 +1,16 @@
 
 #include "../includes/images.h"
 
-void    ft_add_images(t_image *image)
+void    init_images_params(t_image *img)
+{
+    img->image = NULL;
+    img->p_colors = 0;
+    img->b_pixel = 0;
+    img->size_line = 0;
+    img->endian = 0;
+}
+
+void    ft_add_images(t_image *img)
 {
     int i;
     int j; 
