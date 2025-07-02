@@ -16,29 +16,37 @@
 #include "../libft/libft.h"
 #include "../mlx/mlx.h"
 #include "images.h"
+#include "textures.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
 
 typedef struct s_general
 {
-    void    *mlx;
-    void    *win;
-    int     win_heigth;
-    int     win_width;
-    char    **map;
+    void    *mlx; //puntero a MLX
+    void    *win; //puntero para referenciar la ventana
+    int     win_heigth; //altura de WIN
+    int     win_width; //anchura de WIN
+    char    **map; //para guardar el MAPA
 
-    t_image *img;
+    int     **textures; //doble puntero, donde guardar las texturas de las paredes
+
+    t_image *img; //puntero al STRUCT de IMAGE
+    t_texture *text; //puntero a la STRUCT de TEXTURE
     
 } t_general;
 
 //INIT GENERAL
 void    init_general(t_general *gen);
 void    init_images_params(t_image *img);
+void    init_text_params(t_texture *text);
 
 //INIT MLX
 void    init_mlx(t_general *gen);
 void    init_img(t_general *gen, t_image *img, int width, int heigth);
+void    init_textures_img(t_general *gen, t_image *img, char *path);
 
+//INIT TEXTURES
+void    init_textures(t_general *gen);
 
 #endif

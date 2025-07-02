@@ -18,10 +18,10 @@
 typedef struct s_image
 {
     void    *image; //puntero para refernciar la imagen
-    int     *addr; //punter a la memoria dels pixels de la imatge, per poder modificar el valor dels pixels
-    int     pixel_bits; //quants bits per pixels
-    int     size_line; //mida en bytes de una linea de la imatge
-    int     endian; //indica com s'emmagatzmen els bytes dels colors
+    int     *addr; //puntero a la memoria de los pixels, para modificar su valor
+    int     pixel_bits; //num de bits por pixel
+    int     size_line; //mida de la linea de una imagen
+    int     endian; //indica como se guardan los bytes, para dp poder modificar
 
 } t_image;
 

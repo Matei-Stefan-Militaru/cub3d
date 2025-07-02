@@ -12,6 +12,17 @@
 
 #include "../includes/general.h"
 
+void    init_text_params(t_texture *text)
+{
+    text->N = NULL;
+    text->S = NULL;
+    text->W = NULL;
+    text->E = NULL;
+    text->floor = 0;
+    text->ceiling = 0;
+    text->size = 64;
+}
+
 void    init_images_params(t_image *img)
 {
     img->image = NULL;
