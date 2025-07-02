@@ -3,12 +3,14 @@
 
 int main(void)
 {
-    t_window *w;
+    t_general gen;
     
-    w = (t_window *)malloc(sizeof(t_window));
-    new_window(w);
-    //ft_add_images(w->img);
-    mlx_loop(w->mlx);
+    //if (argc != 2)
+    //    printf("Args error\n");
+    init_general(&gen);
+    //parseo
+    init_mlx(&gen);
+    mlx_loop(&gen);
 
     return (0);
 

@@ -14,19 +14,15 @@
 #define IMAGES_H
 
 #include "../mlx/mlx.h"
-#include "../includes/window.h"
 
 typedef struct s_image
 {
     void    *image; //puntero para refernciar la imagen
-    int     *p_colors; //(pixel_colors) puntero para escribir los colores de los pixeles
-    int     b_pixel; // (bits_pixel) para saber como construir un pixel
-    int     size_line; //sirve para navegar por el buffer de pixel_colors
-    int     endian; // define el orden de cada byte para cada pixel
-    
-} t_image;
+    int     *addr; //punter a la memoria dels pixels de la imatge, per poder modificar el valor dels pixels
+    int     pixel_bits; //quants bits per pixels
+    int     size_line; //mida en bytes de una linea de la imatge
+    int     endian; //indica com s'emmagatzmen els bytes dels colors
 
-void    ft_add_images(t_image *image);
-void    ft_load_image(t_image *image);
+} t_image;
 
 #endif

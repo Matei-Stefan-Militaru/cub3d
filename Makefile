@@ -1,0 +1,37 @@
+NAME		= cub3D
+
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror -Iincludes -Imlx -Ilibft
+
+# === PATHS ===
+SRC_DIR		= src
+LIBFT_DIR	= libft
+MLX_DIR		= mlx
+
+# === FILES ===
+SRC_FILES	= $(shell find $(SRC_DIR) -name '*.c')
+OBJ_FILES	= $(SRC_FILES:.c=.o)
+
+LIBFT		= $(LIBFT_DIR)/libft.a
+MLX_LIB		= -L$(MLX_DIR) -lmlx -lXext -lX11
+
+# === RULES ===
+all: $(NAME)
+
+$(LIBFT):
+	@$(MAKE) -C $(LIBFT_DIR)
+
+$(NAME): $(LIBFT) $(OBJ_FILES)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(LIBFT) $(MLX_LIB)
+
+clean:
+	@$(MAKE) clean -C $(LIBFT_DIR)
+	@rm -f $(OBJ_FILES)
+
+fclean: clean
+	@$(MAKE) fclean -C $(LIBFT_DIR)
+	@rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
