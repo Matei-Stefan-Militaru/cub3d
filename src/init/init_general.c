@@ -20,7 +20,8 @@ void    init_text_params(t_texture *text)
     text->E = NULL;
     text->floor = 0;
     text->ceiling = 0;
-    text->size = 64;
+    text->w_size = 64;
+    text->h_size = 64;
 }
 
 void    init_images_params(t_image *img)
