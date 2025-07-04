@@ -17,7 +17,7 @@
 
 typedef struct s_player
 {
-    char    loc; //para saber donde esta el jugador en el map
+    char    exist; //para si hay PLAYER
     int     pos_x; //posicion X de player
     int     pos_y; //posicion Y de player
 

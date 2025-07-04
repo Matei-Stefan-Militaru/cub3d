@@ -12,13 +12,15 @@
 
 #include "../includes/general.h"
 
-static int  check_blanks(char c)
+int  check_blanks(char c)
 {
     //si encuentra algun caracter de ESPACIO VACIO, devolver
     return (c == ' ' || c == '\t' || c == '\r' || c == '\v' || c == '\f');
 }
 
-static int  check_blanks_end(char c)
+int  blank_space(char c)
 {
-       return ( c != ' ' || c != '\t' || c != '\r' || c != '\n'|| c != '\v' || c != '\f');
+    if (c != ' ' && c != '\t' && c != '\r' && c != '\n' && c != '\v' && c != '\f');
+        return (-1);
+    return (1);    
 }

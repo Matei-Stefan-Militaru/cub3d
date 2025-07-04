@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef TEXT_H
+#define TEXT_H
+
 #include "../mlx/mlx.h"
 
 typedef struct s_texture
@@ -24,3 +27,7 @@ typedef struct s_texture
     int     h_size; //la alargada de la textura
 
 }  t_texture;
+
+void    init_textures(t_general *gen);
+
+#endif

@@ -27,6 +27,17 @@ typedef struct s_map
 
 } t_map;
 
-
-
+//PARSE
+/*
+static int  map_elements(t_general *gen, char **map);
+static int  map_position(t_general *gen, char **map);
+static int  map_player_pos(t_general *gen, char **map);
+static int  map_end(t_map *s_map, char **map);
+static int  map_top(char **map, int i);
+static int  map_sides(t_map *s_map, char **map);
+*/
+int check_map(t_general *gen, char **map);
+int  check_blanks(char c);
+int  blank_space(char c);
+ 
 #endif

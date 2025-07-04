@@ -50,13 +50,6 @@ void    init_mlx(t_general *gen);
 void    init_img(t_general *gen, t_image *img, int width, int heigth);
 void    init_textures_img(t_general *gen, t_image *img, char *path);
 
-//INIT TEXTURES
-void    init_textures(t_general *gen);
 
-
-//PARSE
-static int  check_map_elements(t_general *gen, char **map);
-static int  check_blanks(char c);
-static int  check_blanks_end(char c);
 
 #endif

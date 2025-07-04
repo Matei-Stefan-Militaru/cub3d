@@ -14,7 +14,6 @@
 
 
 /* creamos una imagen vacia que podemos dibujar despues pixel a pixel*/
-
 void    init_img(t_general *gen, t_image *img, int width, int heigth)
 {
     //iniciamos valores
@@ -30,13 +29,12 @@ void    init_img(t_general *gen, t_image *img, int width, int heigth)
 }
 
 /* cogemos una imagen desde PATH y la pasamos de XMP a imagen*/
-
 void    init_textures_img(t_general *gen, t_image *img, char *path)
 {
     //iniciamos valores
     init_images_params(img);
     //cargamos la imagen XMP desde PATH
-    img->image = mlx_xpm_file_to_image(gen->mlx, path, &gen->text->size, &gen->text->size); 
+    img->image = mlx_xpm_file_to_image(gen->mlx, path, &gen->text->h_size, &gen->text->w_size); 
     if (img->image == NULL)
         printf("Error en textura\n");
     //accedemos a los datos de los pixeles de esta imagen
@@ -46,7 +44,6 @@ void    init_textures_img(t_general *gen, t_image *img, char *path)
 }
 
 /* iniciamos la MLX (ventana) */
-
 void    init_mlx(t_general *gen)
 {
     //iniciamos MLX
