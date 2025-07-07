@@ -42,21 +42,54 @@ void    init_textures_img(t_general *gen, t_image *img, char *path)
     
 }
 
+/* cogemos la imagen XPM y la guardamos en un array en la RAM, para que sea mas rapido a la hora de leer*/
+int save_xmp_to_ram(t_general *gen, char *path)
+{
+    t_image tmp;
+    int *ram;
+    int x;
+    int y;
+
+    //iniciamos las texturas de la imagen
+    init_textures_img(gen, &tmp, path);
+    //reservamos memoria para un array de 1, donde el elmento sera del tamaño del size de la textura
+    ram = ft_calloc(1, sizeof * ram * gen->text->w_size * gen->text->h_size);
+    if (!ram)
+        clean_exit(gen, -1);
+    y = 0;
+    while (y < gen->text->h_size)
+    {
+        x = 0;
+        while (x < gen->text->w_size)
+        {
+            /*esta formula, indica que pixel 2D (en las coordenadas X y Y), sera el pixel en el array 1D
+            entonces para saber, cogemos la fila columna Y * ANCHURA DE PIXEL + fila X
+            EJEMPLO = imagen 10 pixel, si queremos saber qual es el pixel x=3, y=2 en 1D
+            seria, indice (pixel en 1d) = 2 * 10 + 3 = 23, entonces el pixel[3][2] sera igual al pixel 23, en 1D*/
+            ram[y * gen->text->w_size + x] = tmp.addr[y * gen->text->w_size + x];
+            x++;
+        }
+        y++;
+    }
+    //destruimos la imagen de tmp
+    mlx_destroy_image(gen->mlx, tmp.image);
+    //retornamos la nueva imagen en 1S
+    return (ram);
+}
+
 /* iniciamos las texturas de las paredes*/
 void init_textures(t_general *gen)
 {
     int i;
 
     i = 0;
-    //creamos con malloc 5 espacios t_textures
-    gen->text = malloc(5 * sizeof(*gen->text));
+    //reservamos espacio para un array de 5, tamaño de gen->text    
+    gen->text = ft_calloc(5, sizeof * gen->text);
     if (!gen->text)
-        printf("Error\n"); 
-    //iniciamos los espacios a 0
-    ft_memset(gen->text, 0, 5 * sizeof(*gen->text));
-    //asignamos cada array de int **textures de general, su imagen XMP
-    gen->textures[0] = mlx_xpm_to_image(gen, gen->text->N, gen->text->w_size, gen->text->h_size);
-    gen->textures[1] = mlx_xpm_to_image(gen, gen->text->S, gen->text->w_size, gen->text->h_size);
-    gen->textures[2] = mlx_xpm_to_image(gen, gen->text->W, gen->text->w_size, gen->text->h_size);
-    gen->textures[3] = mlx_xpm_to_image(gen, gen->text->E, gen->text->w_size, gen->text->h_size);
+        clean_exit(gen, -1);
+    /* a cada array se le guardara la imagen XPM, passada a memoria */
+    gen->textures[0] = save_xmp_to_ram(gen, gen->text->N);
+    gen->textures[1] = save_xmp_to_ram(gen, gen->text->S);
+    gen->textures[2] = save_xmp_to_ram(gen, gen->text->W);
+    gen->textures[3] = save_xmp_to_ram(gen, gen->text->E);
 }
