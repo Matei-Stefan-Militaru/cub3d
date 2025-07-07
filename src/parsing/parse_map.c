@@ -117,7 +117,7 @@ static int  map_end(t_map *s_map, char **map)
 {
     int     i;
     int     j;
-
+    
     i = s_map->end_map;
     while (s_map->file[i][j])
     {

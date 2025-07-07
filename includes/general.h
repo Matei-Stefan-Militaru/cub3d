@@ -22,6 +22,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <X11/keysym.h>
+#include <stdbool.h>
 
 typedef struct s_general
 {
@@ -32,6 +34,7 @@ typedef struct s_general
     char    **map; //para guardar el MAPA
 
     int     **textures; //doble puntero, donde guardar las texturas de las paredes
+    int     **text_pixels;
 
     t_image *img; //puntero al STRUCT de IMAGE
     t_texture *text; //puntero a la STRUCT de TEXTURE
@@ -39,17 +42,5 @@ typedef struct s_general
     t_map   *s_map; //puntero a la STRUCT de MAP
     
 } t_general;
-
-//INIT GENERAL
-void    init_general(t_general *gen);
-void    init_images_params(t_image *img);
-void    init_text_params(t_texture *text);
-
-//INIT MLX
-void    init_mlx(t_general *gen);
-void    init_img(t_general *gen, t_image *img, int width, int heigth);
-void    init_textures_img(t_general *gen, t_image *img, char *path);
-
-
 
 #endif

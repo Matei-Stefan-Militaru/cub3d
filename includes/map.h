@@ -17,27 +17,14 @@
 
 typedef struct s_map
 {
-    int     fd;
-    int     line_count;
-    char    *path;
-    char    **file;
-    int     height;
-    int     width;
-    int     end_map;
+    int     fd; //file descriptor
+    int     line_count; //cuantas lineas tiene el MAPA
+    char    *path; //donde esta guardado el MAPA
+    char    **file; //para saber el contenido del MAPA, linea por linea.
+    int     height; //alargada del MAPA
+    int     width; //amplitud del MAPA
+    int     end_map; //punto para saber si se ha llegado al final del MAPA.
 
 } t_map;
-
-//PARSE
-/*
-static int  map_elements(t_general *gen, char **map);
-static int  map_position(t_general *gen, char **map);
-static int  map_player_pos(t_general *gen, char **map);
-static int  map_end(t_map *s_map, char **map);
-static int  map_top(char **map, int i);
-static int  map_sides(t_map *s_map, char **map);
-*/
-int check_map(t_general *gen, char **map);
-int  check_blanks(char c);
-int  blank_space(char c);
  
 #endif

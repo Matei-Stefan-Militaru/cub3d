@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*   images_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/02 10:12:20 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/02 10:12:20 by marvin           ###   ########.fr       */
+/*   Created: 2025/07/07 12:19:06 by marvin            #+#    #+#             */
+/*   Updated: 2025/07/07 12:19:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/general.h"
 
-/* iniciamos la MLX (ventana) */
-void    init_mlx(t_general *gen)
+void    set_color_pixel(t_image *img, int x, int y, int color)
 {
-    //iniciamos MLX
-    gen->mlx = mlx_init(); 
-    if (!gen->mlx)
-        printf("Error\n");
-    //iniciamos ventana
-    gen->win = mlx_new_window(gen->mlx, gen->win_width, gen->win_heigth, "Cub3D"); 
-    if (!gen->win)
-        printf("Error en win\n");
+    int pixel;
+
+    pixel = y * (img->size_line / 4) + x;
+    img->addr[pixel] = color;
 }

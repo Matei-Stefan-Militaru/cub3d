@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*   exit_cub3d.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/02 10:12:20 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/02 10:12:20 by marvin           ###   ########.fr       */
+/*   Created: 2025/07/07 09:56:08 by marvin            #+#    #+#             */
+/*   Updated: 2025/07/07 09:56:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/general.h"
 
-/* iniciamos la MLX (ventana) */
-void    init_mlx(t_general *gen)
+void    clean_exit(t_general *gen, int code)
 {
-    //iniciamos MLX
-    gen->mlx = mlx_init(); 
-    if (!gen->mlx)
-        printf("Error\n");
-    //iniciamos ventana
-    gen->win = mlx_new_window(gen->mlx, gen->win_width, gen->win_heigth, "Cub3D"); 
-    if (!gen->win)
-        printf("Error en win\n");
+    if (!gen)
+        exit(code);
+    if (gen->win && gen->mlx)
+        mlx_destroy_window(gen->mlx, gen->win);
+    if (gen->mlx)
+    {
+        mlx_destroy_display(gen->mlx);
+        mlx_loop_end(gen->mlx);
+        free(gen->mlx);
+    }
+    free(gen);
+    exit(code);
+}
+
+int quit(t_general *gen)
+{
+    clean_exit(gen, 0);
+    return (0);
 }

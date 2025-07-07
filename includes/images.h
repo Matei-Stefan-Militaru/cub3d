@@ -17,11 +17,11 @@
 
 typedef struct s_image
 {
-    void    *image; //puntero para refernciar la imagen
-    int     *addr; //puntero a la memoria de los pixels, para modificar su valor
-    int     pixel_bits; //num de bits por pixel
-    int     size_line; //mida de la linea de una imagen
-    int     endian; //indica como se guardan los bytes, para dp poder modificar
+    void    *image; //puntero en donde esta la IMAGEN guardada en la MEMORIA
+    int     *addr; //puntero en donde estan los PIXELES de la IMAGEN en la MEMORIA, sirve para acceder y modificar cada pixel (color, tamaño, etc...)
+    int     pixel_bits; //indica cuantos BITS ocupa cada PIXEL, sino el programa puede leer mal los datos
+    int     size_line; //indica cuantos BYTES ocupa una linea de la IMAGEN en la MEMORIA
+    int     endian; //indica como se guardan los BYTES en la MEMORIA, depende del orden su valor su puede interpretar
 
 } t_image;
 
