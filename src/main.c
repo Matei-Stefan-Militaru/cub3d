@@ -22,7 +22,7 @@ int main(int argc, char **av)
     }
     init_general(&gen);
     if (parse(&gen, av) != 0)
-        return (-1);
+        exit (EXIT_FAILURE);
     init_mlx(&gen);
     //init_images()
     //render_images()
