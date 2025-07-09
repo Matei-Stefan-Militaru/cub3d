@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_position.c                                  :+:      :+:    :+:   */
+/*   player_dir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 09:12:17 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/07 09:12:17 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/09 15:48:49 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/general.h"
 
-static void init_player_dir(t_player *player)
+void init_player_dir(t_player *player)
 {
     if (player->dir == 'S')
     {
@@ -40,6 +40,6 @@ static void init_player_dir(t_player *player)
         player->dir_x = 1;
         player->dir_y = 0;
         player->plane_x = 0;
-        player->plane_y = 0,66;
+        player->plane_y = 0.66;
     }
 }

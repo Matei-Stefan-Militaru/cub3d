@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 21:30:16 by pmorello          #+#    #+#             */
-/*   Updated: 2025/06/30 22:09:06 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/09 15:42:58 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,8 @@ typedef struct s_image
     int     endian; //indica como se guardan los BYTES en la MEMORIA, depende del orden su valor su puede interpretar
 
 } t_image;
+
+
+
 
 #endif

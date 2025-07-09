@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:07:19 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/07 11:07:19 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/09 15:49:55 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static int  move_forward(t_general *gen)
     double  new_y;
     int move;
 
-    new_x = gen->pl->pos_x + gen->pl->dir_x * 0,0125;
-    new_y = gen->pl->pos_y + gen->pl->dir_y * 0,0125;
+    new_x = gen->pl->pos_x + gen->pl->dir_x * 0.0125;
+    new_y = gen->pl->pos_y + gen->pl->dir_y * 0.0125;
     move = validate_move(gen, new_x, new_y);
     return (move);
 }
@@ -30,8 +30,8 @@ static int  move_backward(t_general *gen)
     double  new_y;
     int move;
 
-    new_x = gen->pl->pos_x - gen->pl->dir_x * 0,0125;
-    new_y = gen->pl->pos_y - gen->pl->dir_y * 0,0125;
+    new_x = gen->pl->pos_x - gen->pl->dir_x * 0.0125;
+    new_y = gen->pl->pos_y - gen->pl->dir_y * 0.0125;
     move = validate_move(gen, new_x, new_y);
     return (move);
 }
@@ -42,8 +42,8 @@ static int  move_left(t_general *gen)
     double  new_y;
     int move;
 
-    new_x = gen->pl->pos_x + gen->pl->dir_x * 0,0125;
-    new_y = gen->pl->pos_y - gen->pl->dir_y * 0,0125;
+    new_x = gen->pl->pos_x + gen->pl->dir_x * 0.0125;
+    new_y = gen->pl->pos_y - gen->pl->dir_y * 0.0125;
     move = validate_move(gen, new_x, new_y);
     return (move);
 }
@@ -54,8 +54,8 @@ static int  move_rigth(t_general *gen)
     double  new_y;
     int move;
 
-    new_x = gen->pl->pos_x - gen->pl->dir_x * 0,0125;
-    new_y = gen->pl->pos_y + gen->pl->dir_y * 0,0125;
+    new_x = gen->pl->pos_x - gen->pl->dir_x * 0.0125;
+    new_y = gen->pl->pos_y + gen->pl->dir_y * 0.0125;
     move = validate_move(gen, new_x, new_y);
     return (move);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 09:19:35 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/03 09:19:35 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/09 15:43:20 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ typedef struct s_player
     int     rotate; //indica si PLAYER esta ROTANDO
 
 } t_player;
+
 
 #endif

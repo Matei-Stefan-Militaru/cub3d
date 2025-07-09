@@ -91,7 +91,7 @@ void    init_general(t_general *gen)
     gen->win_heigth = 400;
     gen->win_width = 600;
     init_player_params(gen->pl);
-    init_textures_params(gen->img);
+    init_textures_params(gen->text);
     gen->map = NULL;
     init_map_params(gen->s_map);
     init_images_params(gen->img);

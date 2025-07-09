@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 13:25:33 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/07 13:25:33 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/09 15:46:05 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int     free_data(t_general *gen)
         free_tab((void **)gen->textures);
     if (gen->text_pixels)
         free_tab((void **)gen->text_pixels);
-    free_textures(&gen->text);
+    free_textures(gen->text);
     free_map(gen);
     return (-1);
 }

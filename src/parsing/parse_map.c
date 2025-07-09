@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 09:10:31 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/09 15:35:23 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/09 15:44:23 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static int  map_player_pos(t_general *gen, char **map)
 
     //si existe player
     if (gen->pl->exist == '0')
-        prinf("ERROR\n");
+        printf("ERROR\n");
     i = 0;
     //recorremos i del mapa
     while (map[i])
@@ -119,7 +119,7 @@ static int  map_end(t_map *s_map, char **map)
     int     j;
     
     i = s_map->end_map;
-    while (s_map->file[i][j])
+    while (s_map->file[i])
     {
         j = 0;
         while (s_map->file[i][j])
@@ -184,7 +184,7 @@ static int  map_sides(t_map *s_map, char **map)
     while (i < (s_map->height - 1))
     {
         j = ft_strlen(map[i]) - 1;
-        if (j = 0 || map[i][j] != '1' || map[i][j - 1] != '1')
+        if (j == 0 || map[i][j] != '1' || map[i][j - 1] != '1')
             return (-1);
         i++;
     }

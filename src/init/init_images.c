@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 09:07:01 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/07 09:07:01 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/09 15:46:25 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void    init_textures_img(t_general *gen, t_image *img, char *path)
 }
 
 /* cogemos la imagen XPM y la guardamos en un array en la RAM, para que sea mas rapido a la hora de leer*/
-int save_xmp_to_ram(t_general *gen, char *path)
+int *save_xmp_to_ram(t_general *gen, char *path)
 {
     t_image tmp;
     int *ram;

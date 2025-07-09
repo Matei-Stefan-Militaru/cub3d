@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 10:34:24 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/03 10:34:24 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/09 15:42:10 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int  check_blanks(char c)
 
 int  blank_space(char c)
 {
-    if (c != ' ' && c != '\t' && c != '\r' && c != '\n' && c != '\v' && c != '\f');
+    if (c != ' ' && c != '\t' && c != '\r' && c != '\n' && c != '\v' && c != '\f')
         return (-1);
     return (1);    
 }
