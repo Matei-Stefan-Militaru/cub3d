@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 09:10:31 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/03 09:10:31 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/09 15:35:23 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,16 +194,16 @@ static int  map_sides(t_map *s_map, char **map)
 int check_map(t_general *gen, char **map)
 {
     if (!gen->map)
-        //ERROR
-    if (map_sides(gen->map, map) == -1)
-        //ERROR
+        error(1);
+    if (map_sides(gen->s_map, map) == -1)
+        error(1);
     if (gen->s_map->height < 3)
-        //ERROR
+        error(1);
     if (map_elements(gen, map) == -1)
-        //ERROR
+        error(1);
     if (map_player_pos(gen, map) == -1)
-        //ERROR
-    if (map_end(&gen->s_map, map) == -1)
-        //error
+        error(1);
+    if (map_end(gen->s_map, map) == -1)
+        error(1);
     return (0);
 }

@@ -1,17 +1,22 @@
 
 #include "../includes/general.h"
 
+static int  parse(t_general *gen)
+{
+    //parse
+}
+
+
 int main(void)
 {
     t_general gen;
     
-    //if (argc != 2)
-    //    printf("Args error\n");
-    init_general(&gen);
-    if (parse(&gen) != 0)
+
+    init_general(gen);
+    if (parse(&gen) == 1)
         return (1);
-    init_mlx(&gen);
-    initx_texture(&gen);
+    init_mlx(gen);
+    init_texture(gen);
     //render_images
     init_intput_hooks(&gen);
     mlx_loop(&gen);
