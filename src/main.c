@@ -1,14 +1,28 @@
 
 #include "../includes/general.h"
 
-int main(void)
+static int  parse(t_general *gen, char **av)
+{
+    if (check_map(gen, av) == -1)
+        error(ERROR_MAP, -1);        
+    return (0);
+}
+
+int main(int argc, char **av)
 {
     t_general gen;
 
+    if (argc != 2)
+    {
+        error(ERROR_ARG, -1);
+        return (-1);
+    }
     init_general(&gen);
-    //parse
+    if (parse(&gen, av) != 0)
+        return (-1);
     init_mlx(&gen);
-    //render_images
+    //init_images()
+    //render_images()
     init_input_hooks(&gen);
     mlx_loop(&gen);
     return (0);

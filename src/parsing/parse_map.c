@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 09:10:31 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/09 16:41:38 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/09 18:31:40 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,16 +194,16 @@ static int  map_sides(t_map *s_map, char **map)
 int check_map(t_general *gen, char **map)
 {
     if (!gen->map)
-        error(1);
-    if (map_sides(&gen->s_map, map) == -1)
-        error(1);
-    if (gen->s_map.height < 3)
-        error(1);
-    if (map_elements(gen, map) == -1)
-        error(1);
-    if (map_player_pos(gen, map) == -1)
-        error(1);
-    if (map_end(&gen->s_map, map) == -1)
-        error(1);
+        return (-1);
+    else if (map_sides(&gen->s_map, map) == -1)
+        return (-1);
+    else if (gen->s_map.height < 3)
+        return (-1);
+    else if (map_elements(gen, map) == -1)
+        return (-1);
+    else if (map_player_pos(gen, map) == -1)
+        return (-1);
+    else if (map_end(&gen->s_map, map) == -1)
+        return (-1);
     return (0);
 }

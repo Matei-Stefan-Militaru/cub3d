@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 21:22:10 by pmorello          #+#    #+#             */
-/*   Updated: 2025/07/09 17:16:34 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/09 18:45:58 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 #include <stdbool.h>
 #include <X11/X.h>
 #include <X11/Xlib.h>
+
+#define ERROR_MAP "No map found"
+#define ERROR_ARG "Invalid arguments"
+#define ERROR_CUB_FORMAT "Map is not a .cub format"
+#define ERROR_XPM_FORMAT "File is not a .xpm format"
+
 
 typedef struct s_image
 {
@@ -83,6 +89,13 @@ typedef struct s_texture
 
 }  t_texture;
 
+typedef struct s_ray
+{
+    /* data */
+    
+} t_ray;
+
+
 typedef struct s_general
 {
     void    *mlx; //puntero a MLX
@@ -133,7 +146,7 @@ int	validate_move(t_general *gen, double new_x, double new_y);
 void init_player_dir(t_player *player);
 
 //ERROR
-void error(int code);
+int error(char *s, int code);
 
 //exit
 void    clean_exit(t_general *gen, int code);
