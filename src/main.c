@@ -3,8 +3,11 @@
 
 static int  parse(t_general *gen, char **av)
 {
-    if (check_map(gen, av) == -1)
-        error(ERROR_MAP, -1);        
+    if (check_formats(av) == false)
+        error(ERROR_CUB_FORMAT, -1);   
+    else if (check_map(gen, av) == -1)
+        error(ERROR_MAP, -1);
+         
     return (0);
 }
 
