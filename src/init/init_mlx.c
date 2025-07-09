@@ -3,24 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/02 10:12:20 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/02 10:12:20 by marvin           ###   ########.fr       */
+/*   Created: 2025/07/09 17:14:44 by pmorello          #+#    #+#             */
+/*   Updated: 2025/07/09 17:16:15 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/general.h"
 
-/* iniciamos la MLX (ventana) */
 void    init_mlx(t_general *gen)
 {
-    //iniciamos MLX
-    gen->mlx = mlx_init(); 
-    if (!gen->mlx)
-        printf("Error\n");
-    //iniciamos ventana
-    gen->win = mlx_new_window(gen->mlx, gen->win_width, gen->win_heigth, "Cub3D"); 
-    if (!gen->win)
-        printf("Error en win\n");
+    gen->mlx = mlx_init();
+    gen->win = mlx_new_window(gen->mlx, gen->win_heigth, gen->win_width, "Cub3D");
 }

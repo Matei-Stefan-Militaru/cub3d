@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 09:10:31 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/09 15:44:23 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:41:38 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int  map_elements(t_general *gen, char **map)
     
     i = 0;
     //decimos que player existe
-    gen->pl->exist = '0';
+    gen->pl.exist = '0';
     //Recorremos i del mapa
     while (map[i] != NULL)
     {
@@ -35,11 +35,11 @@ static int  map_elements(t_general *gen, char **map)
             if (!ft_strchr("10NSWE", map[i][j]))
                 printf("Error\n");
             //si encuentra los caracteres "1, 0, N, S, W,o E y la existalizacion de player, es mas de 1, printa error"
-            if (ft_strchr("NSWE", map[i][j]) && gen->pl->exist != '0')
+            if (ft_strchr("NSWE", map[i][j]) && gen->pl.exist != '0')
                 printf("Error\n");
             //si encuentra los chars "1,0,N,S,W o E" y la existalizacion de player, es solo 1,  assinga existalizacio a la posicion de i y j
-            if (ft_strchr("NSWE", map[i][j]) && gen->pl->exist == '0')
-                gen->pl->exist = map[i][j];
+            if (ft_strchr("NSWE", map[i][j]) && gen->pl.exist == '0')
+                gen->pl.exist = map[i][j];
             j++;
         }
         i++;
@@ -57,8 +57,8 @@ static int  map_position(t_general *gen, char **map)
     //definimos todas las direcciones, ARRIBA, ABAJO, DER, IZQ.
     int dx[4] = {0, 0, -1, 1};
     int dy[4] = {-1, 1, 0, 0};
-    i = gen->pl->pos_x;
-    j = gen->pl->pos_y;
+    i = gen->pl.pos_x;
+    j = gen->pl.pos_y;
     k = 0;
     //mientras K sea menor a las possible dirreciones
     while (k < 4)
@@ -83,7 +83,7 @@ static int  map_player_pos(t_general *gen, char **map)
     int     j;
 
     //si existe player
-    if (gen->pl->exist == '0')
+    if (gen->pl.exist == '0')
         printf("ERROR\n");
     i = 0;
     //recorremos i del mapa
@@ -97,8 +97,8 @@ static int  map_player_pos(t_general *gen, char **map)
             if (ft_strchr("NSWE", map[i][j]))
             {
                 //asigna la pos de player
-                gen->pl->pos_x = i;
-                gen->pl->pos_y = j;
+                gen->pl.pos_x = i;
+                gen->pl.pos_y = j;
                 //asigna los char NSWE, como 0
                 map[i][j] = '0';
             }
@@ -195,15 +195,15 @@ int check_map(t_general *gen, char **map)
 {
     if (!gen->map)
         error(1);
-    if (map_sides(gen->s_map, map) == -1)
+    if (map_sides(&gen->s_map, map) == -1)
         error(1);
-    if (gen->s_map->height < 3)
+    if (gen->s_map.height < 3)
         error(1);
     if (map_elements(gen, map) == -1)
         error(1);
     if (map_player_pos(gen, map) == -1)
         error(1);
-    if (map_end(gen->s_map, map) == -1)
+    if (map_end(&gen->s_map, map) == -1)
         error(1);
     return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_pos.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:13:16 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/07 11:13:16 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/09 16:59:33 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static bool	is_valid_pos_wall_collision(t_general *gen, double x, double y)
 
 static bool	is_valid_pos_in_map(t_general *gen, double x, double y)
 {
-	if (x < 0.25 || x >= gen->s_map->width - 1.25)
+	if (x < 0.25 || x >= gen->s_map.width - 1.25)
 		return (false);
-	if (y < 0.25 || y >= gen->s_map->height -0.25)
+	if (y < 0.25 || y >= gen->s_map.height -0.25)
 		return (false);
 	return (true);
 }
@@ -47,14 +47,14 @@ int	validate_move(t_general *gen, double new_x, double new_y)
 	int	moved;
 
 	moved = 0;
-	if (is_valid_pos(gen, new_x, gen->pl->pos_y))
+	if (is_valid_pos(gen, new_x, gen->pl.pos_y))
 	{
-		gen->pl->pos_x = new_x;
+		gen->pl.pos_x = new_x;
 		moved = 1;
 	}
-	if (is_valid_pos(gen, gen->pl->pos_x, new_y))
+	if (is_valid_pos(gen, gen->pl.pos_x, new_y))
 	{
-		gen->pl->pos_y = new_y;
+		gen->pl.pos_y = new_y;
 		moved = 1;
 	}
 	return (moved);

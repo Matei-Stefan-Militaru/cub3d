@@ -86,15 +86,16 @@ void    init_map_params(t_map *map)
 /* iniciamos los valores de la struct GENERAL */
 void    init_general(t_general *gen)
 {
+    
     gen->mlx = NULL;
     gen->win = NULL;
     gen->win_heigth = 400;
     gen->win_width = 600;
-    init_player_params(gen->pl);
-    init_textures_params(gen->text);
+    init_player_params(&gen->pl);
+    init_textures_params(&gen->text);
     gen->map = NULL;
-    init_map_params(gen->s_map);
-    init_images_params(gen->img);
+    init_map_params(&gen->s_map);
+    init_images_params(&gen->img);
     gen->text_pixels = NULL;
     gen->textures = NULL;
 }
