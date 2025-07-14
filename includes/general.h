@@ -159,10 +159,8 @@ typedef struct s_general
     t_ray   ray; //STRUCT de RAYCASTING
     
 } t_general;
-
-
+/*-------------------------------------------------------------------------------*/
 /* INIT */
-
 //init_structures.c
 void    init_s_images(t_image *img);
 void    init_s_ray(t_ray *ray);
@@ -175,9 +173,8 @@ void    init_img(t_general *gen, t_image *img, int width, int height);
 void    init_textures_img(t_general *gen, t_image *img, char *path);
 int     *save_xmp_to_mem(t_general *gen, char *path);
 void    init_textures(t_general *gen);
-
+/*----------------------------------------------------------------------------*/
 /* PLAYER */
-
 //input_keys.c
 void    init_input_hooks(t_general *gen);
 //player_dir.c
@@ -186,9 +183,8 @@ void    init_player_dir(t_general *gen);
 int     move_player(t_general *gen);
 //player_pos.c
 int     validate_move(t_general *gen, double new_x, double new_y);
-
+/*------------------------------------------------------------------------*/
 /* RENDER */
-
 //raycasting.c
 int     raycasting(t_general *gen, t_player *player);
 //render.c
@@ -196,9 +192,8 @@ int     raycasting(t_general *gen, t_player *player);
 int     render(t_general *gen);
 //textures.c
 void	update_texture_pixels(t_general *data, t_texture *text, t_ray *ray, int x);
-
+/*----------------------------------------------------------------------------------*/
 /* UTILS */
-
 //error.c
 int     error(char *detail, char *s, int code);
 int     error_msg(int detail, char *s, int code);
@@ -212,9 +207,24 @@ void    free_tab(void **tab);
 void    set_color_pixel(t_image *img, int x, int y, int color);
 //parse_utils.c
 int     check_blanks(char c);
-int     blank_space(char c);
-void    blank_space_map(char **file, int i, int *j);
-size_t  max_line_map(t_map *map, int i);
-
+int     check_blank_space(char c);
+void    check_blank_space_map(char **file, int i, int *j);
+size_t  check_biggest_line_in_the_map(t_map *map, int i);
+/*------------------------------------------------------------*/
+/* PARSING */
+//parse_texture.c
+int     check_textures(t_general *gen, t_texture *text);
+//parse_read_map.c
+int     create_map(t_general *gen, char **file, int i);
+//parse_map.c
+int     check_map(t_general *gen, char **map);
+//parse_data.c
+void	check_data(char *path, t_general *gen);
+//parse_color.c
+int     fill_color_textures(t_general *gen, t_texture *text, char *line, int j);
+//parse_args.c
+int     check_file(char *file);
+//get_data.c
+int     get_file_data(t_general *gen, char **map);
 
 #endif

@@ -65,7 +65,7 @@ static int  ignore_whitespaces_get_info(t_general *gen, char **map, int i, int j
         if (map[i][j + 1] && ft_isprint(map[i][j + 1]) && !ft_isdigit(map[i][j]))
         {
             if (fill_directions_text(&gen->text, map[i], j) == 2)
-                return (error(ERR_TEXT_INVALID, -1));
+                return (error(gen->s_map.path, ERR_TEX_INVALID, 1));
             return (3);
         }
         else
@@ -78,13 +78,13 @@ static int  ignore_whitespaces_get_info(t_general *gen, char **map, int i, int j
     else if (ft_isdigit(map[i][j]))
     {
         if (create_map(gen, map, i) == 1)
-            return (error(ERR_INVALID_MAP, 1));
+            return (error(gen->s_map.path, ERR_INVALID_MAP, 1));
         return (0);
     }
     return (4); 
 }
 
-int get_file_data(t_general *gen, char **map)
+int     get_file_data(t_general *gen, char **map)
 {
     int i;
     int j;

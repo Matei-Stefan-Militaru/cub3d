@@ -12,19 +12,37 @@
 
 #include "../includes/general.h"
 
+static int  num_of_map_lines(t_general *gen, char **file, int i)
+{
+    int index;
+    int j;
+
+    index = i;
+    while (file[i])
+    {
+        j = 0;
+        blank_space_map(file, i, &j);
+        if (file[i][j] != '1')
+            break;
+        i++; 
+    }
+    gen->s_map.end_map = i;
+    return (i - index);
+}
+
 static int  fill_map(t_map *map, char **n_map, int index)
 {
     int i;
     int j;
 
-    map->width = max_line_map(map, i);
+    map->width = biggest_line_in_the_map(map, i);
     i = 0;
     while (i < map->height)
     {
         j = 0;
         n_map[i] = malloc(sizeof(char) * (map->width + 1));
         if (!n_map)
-            return (error(ERR_MALLOC, -1));
+            return (error(NULL, ERR_MALLOC, 1));
         while (map->file[index][j] && map->file[index][j] != '\n')
         {
             n_map[i][j] = map->file[index][j];
@@ -41,33 +59,13 @@ static int  fill_map(t_map *map, char **n_map, int index)
 
 static int  load_map_data(t_general *gen, char **file, int i)
 {
-    gen->s_map.height = map_lines(gen, file, i);
-    if (!gen->s_map.height)
-        return (error(ERR_MAP_HEIGTH, -1));
+    gen->s_map.height = num_of_map_lines(gen, file, i);
     gen->map = malloc(sizeof(char *) * (gen->s_map.height + 1));
     if (!gen->map)
-        return (error(ERR_MALLOC, -1));
-    if (fill_map(&gen->s_map, gen->map, i) == -1)
-        return (-1);
+        return (error(NULL, ERR_MALLOC, 1));
+    if (fill_map(&gen->s_map, gen->map, i) == 1)
+        return (1);
     return (0);
-}
-
-static int  map_lines(t_general *gen, char **file, int i)
-{
-    int index;
-    int j;
-
-    index = i;
-    while (file[i])
-    {
-        j = 0;
-        blank_space_map(file, i, &j);
-        if (file[i][j] != '1')
-            break;
-        i++; 
-    }
-    gen->s_map.end_map = i;
-    return (i - index);
 }
 
 static void change_space_into_wall(t_general *gen)

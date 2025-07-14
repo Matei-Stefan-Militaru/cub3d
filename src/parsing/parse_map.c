@@ -13,14 +13,14 @@
 #include "../includes/general.h"
 
 /* comprueba los elementos del mapa*/
-static int  map_elements(t_general *gen, char **map)
+static int  check_map_elements(t_general *gen, char **map)
 {
     int     i;
     int     j;
     
     i = 0;
     //decimos que player existe
-    gen->pl.exist = '0';
+    gen->player.exist = '0';
     //Recorremos i del mapa
     while (map[i] != NULL)
     {
@@ -33,13 +33,13 @@ static int  map_elements(t_general *gen, char **map)
                 j++;
             //si no encuentra los caracteres "1,0,N,S,W o E, printa error"
             if (!ft_strchr("10NSWE", map[i][j]))
-                printf("Error\n");
+                return (error(gen->s_map.path, ERR_INV_LETTER, 1));
             //si encuentra los caracteres "1, 0, N, S, W,o E y la existalizacion de player, es mas de 1, printa error"
-            if (ft_strchr("NSWE", map[i][j]) && gen->pl.exist != '0')
-                printf("Error\n");
+            if (ft_strchr("NSWE", map[i][j]) && gen->player.exist != '0')
+                return (error(gen->s_map.path, ERR_NUM_PLAYER, 1));
             //si encuentra los chars "1,0,N,S,W o E" y la existalizacion de player, es solo 1,  assinga existalizacio a la posicion de i y j
-            if (ft_strchr("NSWE", map[i][j]) && gen->pl.exist == '0')
-                gen->pl.exist = map[i][j];
+            if (ft_strchr("NSWE", map[i][j]) && gen->player.exist == '0')
+                gen->player.exist = map[i][j];
             j++;
         }
         i++;
@@ -48,7 +48,7 @@ static int  map_elements(t_general *gen, char **map)
 }
 
 /*mira la posicion de player no este en blanco*/
-static int  map_position(t_general *gen, char **map)
+static int  check_map_position(t_general *gen, char **map)
 {
     int i;
     int j;
@@ -57,8 +57,8 @@ static int  map_position(t_general *gen, char **map)
     //definimos todas las direcciones, ARRIBA, ABAJO, DER, IZQ.
     int dx[4] = {0, 0, -1, 1};
     int dy[4] = {-1, 1, 0, 0};
-    i = gen->pl.pos_x;
-    j = gen->pl.pos_y;
+    i = gen->player.pos_x;
+    j = gen->player.pos_y;
     k = 0;
     //mientras K sea menor a las possible dirreciones
     while (k < 4)
@@ -77,14 +77,14 @@ static int  map_position(t_general *gen, char **map)
 }
 
 /* la pos del player*/
-static int  map_player_pos(t_general *gen, char **map)
+static int  check_map_player_pos(t_general *gen, char **map)
 {
     int     i;
     int     j;
 
     //si existe player
-    if (gen->pl.exist == '0')
-        printf("ERROR\n");
+    if (gen->player.exist == '0')
+        return (error(gen->s_map.path, ERR_PLAYER_DIR, 1));
     i = 0;
     //recorremos i del mapa
     while (map[i])
@@ -97,8 +97,8 @@ static int  map_player_pos(t_general *gen, char **map)
             if (ft_strchr("NSWE", map[i][j]))
             {
                 //asigna la pos de player
-                gen->pl.pos_x = i;
-                gen->pl.pos_y = j;
+                gen->player.pos_x = i;
+                gen->player.pos_y = j;
                 //asigna los char NSWE, como 0
                 map[i][j] = '0';
             }
@@ -108,12 +108,12 @@ static int  map_player_pos(t_general *gen, char **map)
     }
     //comprueba si la posicion de player esta bien dentro del mapa
     if (map_position(gen, map) == -1)
-        printf("Error\n");
+        return (error(gen->s_map.path, ERR_PLAYER_POS, 1));
     return (0);
 }
 
 /* comprueba si el mapa esta cerrado*/
-static int  map_end(t_map *s_map, char **map)
+static int  check_map_end(t_map *s_map, char **map)
 {
     int     i;
     int     j;
@@ -134,76 +134,54 @@ static int  map_end(t_map *s_map, char **map)
 }
 
 /* comprueba que el mapa este cerrado con 1*/
-static int  map_top(char **map)
+static int  check_top_and_bottom_map(char **map, int i, int j)
 {
-    int i;
-
-    i = 0;
-    if (!map || !map[0] || !map[0][i])
+    if (!map || !map[i] || !map[i][j])
         return (-1);
-    while (check_blanks(map[0][i]))
+    while (check_blanks(map[i][j]))
         i++;
-    while (map[0][i])
+    while (map[i][j])
     {
-        if (map[0][i] != '1')
-            return (-1);
+        if (map[i][j] != '1')
+            return (1);
         i++;
     }
     return (0);
 }
 
-/*comprueba que mapa este cerrado con 1*/
-static int  map_bot(char **map, int h)
-{
-    int j;
-
-    j = 0;
-    if (!map || h <= 0 || !map[h - 1] || !map[h - 1][j])
-        return (-1);
-    while (check_blanks(map[h - 1][j]))
-        j++;
-    while (map[h - 1][j])
-    {
-        if (map[h - 1][j] != '1')
-            return (-1);
-        j++;
-    }
-    return (0);
-}
-
-static int  map_sides(t_map *s_map, char **map)
+static int     check_map_sides(t_map *map, char **tmp_map)
 {
     int     i;
     int     j;
 
-    if (map_top(map) == -1)
-        return (-1);
-    if (map_bot(map, s_map->height) == -1)
-        return (-1);
+    if (check_top_and_bottom_map(tmp_map, 0, 0) == 1)
+        return (1);
     i = 1;
-    while (i < (s_map->height - 1))
+    while ( i < (map->height - 1))
     {
-        j = ft_strlen(map[i]) - 1;
-        if (j == 0 || map[i][j] != '1' || map[i][j - 1] != '1')
-            return (-1);
+        j = ft_strlen(tmp_map[i]) - 1;
+        if (tmp_map[i][j] != '1')
+            return (1);
         i++;
     }
+    if (check_top_and_bottom_map(tmp_map, i, 0) == 1)
+        return (1);
     return (0);
 }
 
-int check_map(t_general *gen, char **map)
+int     check_map(t_general *gen, char **map)
 {
     if (!gen->map)
-        return (-1);
-    else if (map_sides(&gen->s_map, map) == -1)
-        return (-1);
+        return (error(gen->s_map.path, ERR_MAP_MISSING, 1));
+    else if (check_map_sides(&gen->s_map, map) == 1)
+        return (error(gen->s_map.path, ERR_MAP_NO_WALLS, 1));
     else if (gen->s_map.height < 3)
-        return (-1);
-    else if (map_elements(gen, map) == -1)
-        return (-1);
-    else if (map_player_pos(gen, map) == -1)
-        return (-1);
-    else if (map_end(&gen->s_map, map) == -1)
-        return (-1);
+        return (error(gen->s_map.path, ERR_MAP_TOO_SMALL, 1));
+    else if (check_map_elements(gen, map) == 1)
+        return (1);
+    else if (check_map_player_pos(gen, map) == 1)
+        return (1);
+    else if (check_map_end(&gen->s_map, map) == -1)
+        return (error(gen->s_map.path, ERR_MAP_LAST, 1));
     return (0);
 }

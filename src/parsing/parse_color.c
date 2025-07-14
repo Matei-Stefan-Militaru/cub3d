@@ -68,21 +68,20 @@ static int	*parse_rgb(const char *line)
 int	fill_color_textures(t_general *gen, t_texture *text, char *line, int j)
 {
 	if (line[j + 1] && ft_isprint(line[j + 1]))
-		return (error(ERR_FLOOR_CEILING, -1));
-
-	if (line[j] == 'C' && !text->ceiling)
+		return (error(gen->s_map.path, ERR_FLOOR_CEILING, 2));
+	if (!text->ceiling && line[j] == 'C')
 	{
 		text->ceiling = parse_rgb(line + j + 1);
 		if (!text->ceiling)
-			return (error(ERR_CEILING, -1));
+			return (error(gen->s_map.path, ERR_COLOR_CEILING, 2));
 	}
-	else if (line[j] == 'F' && !text->floor)
+	else if (!text->floor && line[j] == 'F')
 	{
 		text->floor = parse_rgb(line + j + 1);
 		if (!text->floor)
-			return (error(ERR_FLOOR, -1));
+			return (error(gen->s_map.path, ERR_COLOR_FLOOR, 2));
 	}
 	else
-		return (error(ERR_FLOOR_CEILING, -1));
+		return (error(gen->s_map.path, ERR_FLOOR_CEILING, 2));
 	return (0);
 }

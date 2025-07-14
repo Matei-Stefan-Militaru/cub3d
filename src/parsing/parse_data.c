@@ -12,7 +12,7 @@
 
 #include "../includes/general.h"
 
-static int	get_number_of_lines(char *path)
+static int	check_num_of_lines(char *path)
 {
 	int		fd;
 	char	*line;
@@ -46,7 +46,7 @@ static void	fill_tab(int row, int column, int i, t_general *gen)
 		gen->s_map.file[row] = ft_calloc(ft_strlen(line) + 1, sizeof(char));
 		if (!gen->s_map.file[row])
 		{
-			err_msg(NULL, ERR_MALLOC, 0);
+			error(NULL, ERR_MALLOC, 0);
 			return (free_tab((void **)gen->s_map.file));
 		}
 		while (line[i] != '\0')
@@ -60,7 +60,7 @@ static void	fill_tab(int row, int column, int i, t_general *gen)
 	gen->s_map.file[row] = NULL;
 }
 
-void	parse_data(char *path, t_general *gen)
+void	check_data(char *path, t_general *gen)
 {
 	int		row;
 	int		i;
@@ -69,17 +69,17 @@ void	parse_data(char *path, t_general *gen)
 	i = 0;
 	row = 0;
 	column = 0;
-	gen->s_map.line_count = get_number_of_lines(path);
+	gen->s_map.line_count = check_num_of_lines(path);
 	gen->s_map.path = path;
 	gen->s_map.file = ft_calloc(gen->s_map.line_count + 1, sizeof(char *));
 	if (!(gen->s_map.file))
 	{
-		err_msg(NULL, ERR_MALLOC, 0);
+		error(NULL, ERR_MALLOC, 0);
 		return ;
 	}
 	gen->s_map.fd = open(path, O_RDONLY);
 	if (gen->s_map.fd < 0)
-		err_msg(path, strerror(errno), FAILURE);
+		error(path, strerror(errno), 1);
 	else
 	{
 		fill_tab(row, column, i, gen);

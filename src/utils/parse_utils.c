@@ -18,21 +18,21 @@ int  check_blanks(char c)
     return (c == ' ' || c == '\t' || c == '\r' || c == '\v' || c == '\f');
 }
 
-int  blank_space(char c)
+int  check_blank_space(char c)
 {
     if (c != ' ' && c != '\t' && c != '\r' && c != '\n' && c != '\v' && c != '\f')
         return (-1);
     return (1);    
 }
 
-void     blank_space_map(char **file, int i, int *j)
+void     check_blank_space_map(char **file, int i, int *j)
 {
     while (file[i][*j] == ' ' || file[i][*j] == '\t' || file[i][*j] == '\r' 
         || file[i][*j] == '\v' || file[i][*j] == '\f' )
         *j++;   
 }
 
-size_t  max_line_map(t_map *map, int i)
+size_t  check_biggest_line_in_the_map(t_map *map, int i)
 {
     size_t b_len;
 
@@ -45,4 +45,3 @@ size_t  max_line_map(t_map *map, int i)
     }
     return (b_len);
 }
-
