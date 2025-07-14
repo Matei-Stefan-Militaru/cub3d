@@ -4,9 +4,9 @@
 static int  parse(t_general *gen, char **av)
 {
     if (check_formats(av) == false)
-        error(ERROR_CUB_FORMAT, -1);   
+        error(ERR_CUB_FORMAT, -1);   
     else if (check_map(gen, av) == -1)
-        error(ERROR_MAP, -1);
+        error(ERR_MAP, -1);
          
     return (0);
 }
@@ -17,7 +17,7 @@ int main(int argc, char **av)
 
     if (argc != 2)
     {
-        error(ERROR_ARG, -1);
+        error(ERR_ARG, -1);
         return (-1);
     }
     init_general(&gen);

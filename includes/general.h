@@ -22,11 +22,24 @@
 #include <stdbool.h>
 #include <X11/X.h>
 #include <X11/Xlib.h>
+#include <fcntl.h>
 
-#define ERROR_MAP "No map found\n"
-#define ERROR_ARG "Invalid arguments\n"
-#define ERROR_CUB_FORMAT "Map is not a .cub format\n"
-#define ERROR_XPM_FORMAT "File is not a .xpm format\n"
+# ifndef O_DIRECTORY
+#  define O_DIRECTORY 00200000
+# endif
+
+#define ERR_MAP "No map found\n"
+#define ERR_ARG "Invalid arguments\n"
+#define ERR_CUB_FORMAT "Map is not a .cub format\n"
+#define ERR_XPM_FORMAT "File is not a .xpm format\n"
+#define ERR_FILE_DIR "File is a directory\n"
+#define ERR_MALLOC "Malloc error\n"
+#define ERR_MAP_HEIGTH "Map height is invalid\n"
+#define ERR_RGB "Invalid RGB value (min: 0, max: 255)\n"
+#define ERR_TEXT_MISSING "Missing texture(s)\n"
+#define ERR_CEILING "Invalid ceiling RGB color(s)\n"
+#define ERR_FLOOR "Invalid flooor RGB color(s)\n"
+#define ERR_FLOOR_CEILING "Invalid floor/ceiling"
 
 
 typedef struct s_image
@@ -65,6 +78,7 @@ typedef struct s_player
     int     move_x; //indica si PLAYER esta MOVIENDO en el eje X
     int     move_y; //indica si PLAYER esta moviendo en el eje Y
     int     rotate; //indica si PLAYER esta ROTANDO
+    int     has_moved;
 
 } t_player;
 
@@ -80,10 +94,13 @@ typedef struct s_texture
     unsigned long   hex_ceiling; //color en HEXA; mas rapido de leer
     int     w_size; //la amplitud de la textura
     int     h_size; //la alargada de la textura
-    //int   size, mezcla de w_szie y h_size
+    int     size; //mezcla de w_szie y h_size
     double  pass; //indica cuantos PIXELS hemos avanzado en la TEXTRUA, cada vez que se dibbuja en la pantalla
-    double  pos; //indica en que PIXEL de la TEXTURA esta, cuando se dibuja
-
+    double  pos; //indica en que PIXEL de la TEXTURA esta, cuando se dibuja´
+    int     index;
+    double  step;
+    double  pos;
+    
     int x; //coordenada dentro de la TEXTURA, para saber que PIXEL acceder
     int y; //coordenada dentro de la TEXTURA, para saber que PIXEL acceder
 
@@ -91,8 +108,23 @@ typedef struct s_texture
 
 typedef struct s_ray
 {
-    /* data */
-    
+    double  camera_x;
+    double  dir_x;
+    double  dir_y;
+    int     map_x;
+    int     map_y;
+    int     step_x;
+    int     step_y;
+    double sidedist_x;
+    double sidedist_y;
+    double  deltadist_x;
+    double  deltadist_y;
+    double  wall_dist;
+    double  wall_x;
+    int     side;
+    int     line_height;
+    int     draw_start;
+    int     draw_end;
 } t_ray;
 
 
@@ -111,6 +143,7 @@ typedef struct s_general
     t_texture text; //puntero a la STRUCT de TEXTURE
     t_player pl; //puntero a la STRUCT de PLAYER
     t_map   s_map; //puntero a la STRUCT de MAP
+    t_ray   ray;
     
 } t_general;
 
@@ -121,6 +154,7 @@ void    init_general(t_general *gen);
 void    init_map_params(t_map *map);
 void    init_textures_params(t_texture *text);
 void    init_player_params(t_player *player);
+void    init_ray_params(t_ray *ray);
 void    init_images_params(t_image *img);
 
 //images
@@ -132,13 +166,12 @@ void    set_color_pixel(t_image *img, int x, int y, int color);
 
 //textures
 void init_textures(t_general *gen);
+void    init_texture_pixels(t_general *gen);
+void	update_texture_pixels(t_general *data, t_texture *tex, t_ray *ray, int x);
 
-//map
+//parse
 int check_map(t_general *gen, char **map);
-int  check_blanks(char c);
-int  blank_space(char c);
-bool check_formats(char **av);
-
+int check_file(char *file);
 
 //player
 void    init_input_hooks(t_general *gen);
@@ -157,6 +190,18 @@ int quit(t_general *gen);
 //free
 void    free_tab(void **tab);
 int     free_data(t_general *gen);
+
+//pares_utils
+int  check_blanks(char c);
+int  blank_space(char c);
+void     blank_space_map(char **file, int i, int *j);
+size_t  max_line_map(t_map *map, int i);
+
+
+//render
+void    set_frame_image_pixel(t_general *gen, t_image *img, int x, int y);
+void    render_images(t_general *gen);
+int     render(t_general *gen);
 
 
 #endif

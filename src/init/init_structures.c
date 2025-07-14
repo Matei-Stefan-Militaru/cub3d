@@ -71,6 +71,25 @@ void    init_textures_params(t_texture *text)
     text->y = 0;
 }
 
+void    init_ray_params(t_ray *ray)
+{
+    ray->camera_x;
+    ray->dir_x;
+    ray->dir_y;
+    ray->map_x;
+    ray->map_y;
+    ray->sidedist_x;
+    ray->sidedist_y;
+    ray->deltadist_x;
+    ray->deltadist_y;
+    ray->wall_dist;
+    ray->wall_x;
+    int     side;
+    int     line_height;
+    int     draw_start;
+    int     draw_end;
+}
+
 /*iniciamos los valores de de la struct MAP*/
 void    init_map_params(t_map *map)
 {

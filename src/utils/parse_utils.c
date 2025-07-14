@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map_utils.c                                  :+:      :+:    :+:   */
+/*   parse_read_map_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/03 10:34:24 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/09 15:42:10 by pmorello         ###   ########.fr       */
+/*   Created: 2025/07/10 13:12:03 by marvin            #+#    #+#             */
+/*   Updated: 2025/07/10 13:12:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,3 +24,25 @@ int  blank_space(char c)
         return (-1);
     return (1);    
 }
+
+void     blank_space_map(char **file, int i, int *j)
+{
+    while (file[i][*j] == ' ' || file[i][*j] == '\t' || file[i][*j] == '\r' 
+        || file[i][*j] == '\v' || file[i][*j] == '\f' )
+        *j++;   
+}
+
+size_t  max_line_map(t_map *map, int i)
+{
+    size_t b_len;
+
+    b_len = ft_strlen(map->file[i]);
+    while (map->file[i])
+    {
+        if (ft_strlen(map->file[i]) > b_len)
+            b_len = ft_strlen(map->file[i]);
+        i++;
+    }
+    return (b_len);
+}
+
