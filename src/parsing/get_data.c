@@ -38,3 +38,74 @@ static char *get_text_path(char *line, int j)
     }
     return (path);
 }
+
+static int  fill_directions_text(t_texture *text, char *line, int j)
+{
+    if (line[j + 2]&& ft_isprint(line[j + 2]))
+        return(2);
+    if (line[j] == 'N' && line[j + 1] == 'O' && !(text->N))
+        text->N = get_text_path(line, j + 2);
+    else if (line[j] == 'S' && line[j + 1] == 'O' && !(text->S))
+        text->S = get_text_path(line, j + 2);
+    else if (line[j] == 'W' && line[j + 1] == 'E' && !(text->W))
+        text->W = get_text_path(line, j + 2);
+    else if (line[j] == 'E' && line[j + 1] == 'A' && !(text->E))
+        text->E = get_text_path(line, j + 2);
+    else
+        return (2);
+    return(0);
+}
+
+static int  ignore_whitespaces_get_info(t_general *gen, char **map, int i, int j)
+{
+    while (map[i][j] == ' ' || map[i][j] == '\t' || map[i][j] == '\n')
+        j++;
+    if (ft_isprint(map[i][j]) && !ft_isdigit(map[i][j]))
+    {
+        if (map[i][j + 1] && ft_isprint(map[i][j + 1]) && !ft_isdigit(map[i][j]))
+        {
+            if (fill_directions_text(&gen->text, map[i], j) == 2)
+                return (error(ERR_TEXT_INVALID, -1));
+            return (3);
+        }
+        else
+        {
+            if (fill_color_textures(gen, &gen->text, map[i], j) == 2)
+                return (1);
+            return(3);
+        }
+    }
+    else if (ft_isdigit(map[i][j]))
+    {
+        if (create_map(gen, map, i) == 1)
+            return (error(ERR_INVALID_MAP, 1));
+        return (0);
+    }
+    return (4); 
+}
+
+int get_file_data(t_general *gen, char **map)
+{
+    int i;
+    int j;
+    int ret;
+
+    i = 0;
+    while (map[i])
+    {
+        j = 0;
+        while (map[i][j])
+        {
+            ret = ignore_whitespaces_get_info(gen, map, i, j);
+            if (ret == 3)
+                break;
+            else if (ret == 1)
+                return (1);
+            else if (ret == 0)
+                return (0);
+            j++;
+        }
+        i++;
+    }
+    return (0);
+}

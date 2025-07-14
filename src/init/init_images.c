@@ -11,31 +11,29 @@
 /* ************************************************************************** */
 
 #include "../includes/general.h"
-
 /* creamos una imagen vacia que podemos dibujar despues pixel a pixel*/
 void    init_img(t_general *gen, t_image *img, int width, int heigth)
 {
     //iniciamos valores
-    init_images_params(&gen->img);
+    init_s_images(&gen->img);
     //se crea una imagen en negro o vacio
     img->image = mlx_new_image(gen->mlx, width, heigth); 
     if (img->image == NULL)
-        printf("Error IMG\n");
+        clean_exit(gen, error("mlx", ERR_MLX_IMG, 1));
     //accedemos a los datos de los pixeles para poder modificar
     img->addr = (int *)mlx_get_data_addr(img->image, &img->pixel_bits, 
-        &img->size_line, &img->endian); 
-    
+        &img->size_line, &img->endian);     
 }
 
 /* cogemos una imagen desde PATH y la pasamos de XMP a imagen*/
 void    init_textures_img(t_general *gen, t_image *img, char *path)
 {
     //iniciamos valores
-    init_images_params(&gen->img);
+    init_s_images(&gen->img);
     //cargamos la imagen XMP desde PATH
     img->image = mlx_xpm_file_to_image(gen->mlx, path, &gen->text.h_size, &gen->text.w_size); 
     if (img->image == NULL)
-        printf("Error en textura\n");
+        clean_exit(gen, error("mlx", ERR_MLX_IMG, 1));
     //accedemos a los datos de los pixeles de esta imagen
     img->addr = (int *)mlx_get_data_addr(img->image, &img->pixel_bits,
         &img->size_line, &img->endian);
@@ -43,7 +41,7 @@ void    init_textures_img(t_general *gen, t_image *img, char *path)
 }
 
 /* cogemos la imagen XPM y la guardamos en un array en la RAM, para que sea mas rapido a la hora de leer*/
-int *save_xmp_to_ram(t_general *gen, char *path)
+int *save_xmp_to_mem(t_general *gen, char *path)
 {
     t_image tmp;
     int *ram;

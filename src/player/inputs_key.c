@@ -17,17 +17,17 @@ static int  key_press(int key, t_general *gen)
     if (key == XK_Escape)
         //fuera de ventana
     if (key == XK_Left)
-        gen->pl.rotate -= 1;
+        gen->player.rotate -= 1;
     if (key == XK_Right)
-        gen->pl.rotate += 1;
+        gen->player.rotate += 1;
     if (key == XK_w)
-        gen->pl.move_y = 1;
+        gen->player.move_y = 1;
     if (key == XK_a)
-        gen->pl.move_x = -1;
+        gen->player.move_x = -1;
     if (key == XK_s)
-        gen->pl.move_y = -1;
+        gen->player.move_y = -1;
     if (key == XK_d)
-        gen->pl.move_x = 1;
+        gen->player.move_x = 1;
     return (0);
 }
 
@@ -35,18 +35,18 @@ static int  key_release(int key, t_general *gen)
 {
     if (key == XK_Escape)
         //fuera de ventana
-    if (key == XK_Left && gen->pl.rotate <= 1)
-        gen->pl.rotate = 0;
-    if (key == XK_Right && gen->pl.rotate >= -1)
-        gen->pl.rotate = 0;
-    if (key == XK_w && gen->pl.move_y == 1)
-        gen->pl.move_y = 1;
-    if (key == XK_a && gen->pl.move_x == -1)
-        gen->pl.move_x += 1;
-    if (key == XK_s && gen->pl.move_y == -1)
-        gen->pl.move_y = 0;
-    if (key == XK_d && gen->pl.move_x == 1)
-        gen->pl.move_x += 1;
+    if (key == XK_Left && gen->player.rotate <= 1)
+        gen->player.rotate = 0;
+    if (key == XK_Right && gen->player.rotate >= -1)
+        gen->player.rotate = 0;
+    if (key == XK_w && gen->player.move_y == 1)
+        gen->player.move_y = 1;
+    if (key == XK_a && gen->player.move_x == -1)
+        gen->player.move_x += 1;
+    if (key == XK_s && gen->player.move_y == -1)
+        gen->player.move_y = 0;
+    if (key == XK_d && gen->player.move_x == 1)
+        gen->player.move_x += 1;
     return (0);
 }
 

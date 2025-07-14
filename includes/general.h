@@ -28,18 +28,31 @@
 #  define O_DIRECTORY 00200000
 # endif
 
-#define ERR_MAP "No map found\n"
-#define ERR_ARG "Invalid arguments\n"
-#define ERR_CUB_FORMAT "Map is not a .cub format\n"
-#define ERR_XPM_FORMAT "File is not a .xpm format\n"
-#define ERR_FILE_DIR "File is a directory\n"
-#define ERR_MALLOC "Malloc error\n"
-#define ERR_MAP_HEIGTH "Map height is invalid\n"
-#define ERR_RGB "Invalid RGB value (min: 0, max: 255)\n"
-#define ERR_TEXT_MISSING "Missing texture(s)\n"
-#define ERR_CEILING "Invalid ceiling RGB color(s)\n"
-#define ERR_FLOOR "Invalid flooor RGB color(s)\n"
-#define ERR_FLOOR_CEILING "Invalid floor/ceiling"
+# define ERR_USAGE "usage: ./cub3d <path/to/map.cub>"
+
+# define ERR_FILE_NOT_CUB "Not a .cub file"
+# define ERR_FILE_NOT_XPM "Not an .xpm file"
+# define ERR_FILE_IS_DIR "Is a directory"
+# define ERR_FLOOR_CEILING "Invalid floor/ceiling RGB color(s)"
+# define ERR_COLOR_FLOOR "Invalid floor RGB color"
+# define ERR_COLOR_CEILING "Invalid ceiling RGB color"
+# define ERR_INVALID_MAP "Map description is either wrong or incomplete"
+# define ERR_INV_LETTER "Invalid character in map"
+# define ERR_NUM_PLAYER "Map has more than one player"
+# define ERR_TEX_RGB_VAL "Invalid RGB value (min: 0, max: 255)"
+# define ERR_TEX_MISSING "Missing texture(s)"
+# define ERR_TEX_INVALID "Invalid texture(s)"
+# define ERR_COLOR_MISSING "Missing color(s)"
+# define ERR_MAP_MISSING "Missing map"
+# define ERR_MAP_TOO_SMALL "Map is not at least 3 lines high"
+# define ERR_MAP_NO_WALLS "Map is not surrounded by walls"
+# define ERR_MAP_LAST "Map is not the last element in file"
+# define ERR_PLAYER_POS "Invalid player position"
+# define ERR_PLAYER_DIR "Map has no player position (expected N, S, E or W)"
+# define ERR_MALLOC "Could not allocate memory"
+# define ERR_MLX_START "Could not start mlx"
+# define ERR_MLX_WIN "Could not create mlx window"
+# define ERR_MLX_IMG "Could not create mlx image"
 
 
 typedef struct s_image
@@ -108,23 +121,23 @@ typedef struct s_texture
 
 typedef struct s_ray
 {
-    double  camera_x;
-    double  dir_x;
-    double  dir_y;
-    int     map_x;
-    int     map_y;
-    int     step_x;
-    int     step_y;
-    double sidedist_x;
-    double sidedist_y;
-    double  deltadist_x;
-    double  deltadist_y;
-    double  wall_dist;
-    double  wall_x;
-    int     side;
-    int     line_height;
-    int     draw_start;
-    int     draw_end;
+    double      camera_x; //posicion de CAMERA en EJE X
+    double      dir_x; //direccion del RAYO en EJE X
+    double      dir_y; //direccion del RAYO en EJE Y
+    int         map_x; //coordenada del EJE X, donde esta el RAYO
+    int         map_y; //coordenada del EJE Y, donde esta el RAYO
+    int         step_x; //direccion a qual avanza el RAYO en EJE X
+    int         step_y; //direccion a qual avanza el RAYO en EJE Y
+    double      ngd_x; //Next Grid Dist, distancia hasta la siguiente quadricula en EJE X
+    double      ngd_y; //Next Grid Dist, distancia hasta la sguiente quadricual en EJE Y
+    double      ncd_x; //Next Cell Dist, distancia hasta la siguiente celda en EJE X
+    double      ncd_y; //Next Cell Dist, distancia hasta la siguiente celda en EJE Y
+    double      wall_dist; //Distancia hasta llegar a una PARED
+    double      wall_x; //Posicion donde impacta RAYO en la PARED
+    int         side; //Saber si es una PARED horizontal o vertical
+    int         line_height; //Alarga de la linea que se dibujara en pantalla
+    int         draw_start; //Donde empieza la PARED en la ventana
+    int         draw_end; //Donde acaba la PARED en la ventana
 } t_ray;
 
 
@@ -132,76 +145,76 @@ typedef struct s_general
 {
     void    *mlx; //puntero a MLX
     void    *win; //puntero para referenciar la ventana
-    int     win_heigth; //altura de WIN
+    int     win_height; //altura de WIN
     int     win_width; //anchura de WIN
     char    **map; //para guardar el MAPA
 
     int     **textures; //doble puntero, donde guardar las texturas de las paredes
     int     **text_pixels;
 
-    t_image img; //puntero al STRUCT de IMAGE
-    t_texture text; //puntero a la STRUCT de TEXTURE
-    t_player pl; //puntero a la STRUCT de PLAYER
-    t_map   s_map; //puntero a la STRUCT de MAP
-    t_ray   ray;
+    t_image img; //STRUCT de IMAGE
+    t_texture text; //STRUCT de TEXTURE
+    t_player player; //STRUCT de PLAYER
+    t_map   s_map; //STRUCT de MAP
+    t_ray   ray; //STRUCT de RAYCASTING
     
 } t_general;
 
 
-//general
-void    init_mlx(t_general *gen);
-void    init_general(t_general *gen);
-void    init_map_params(t_map *map);
-void    init_textures_params(t_texture *text);
-void    init_player_params(t_player *player);
-void    init_ray_params(t_ray *ray);
-void    init_images_params(t_image *img);
+/* INIT */
 
-//images
-void    init_img(t_general *gen, t_image *img, int width, int heigth);
+//init_structures.c
+void    init_s_images(t_image *img);
+void    init_s_ray(t_ray *ray);
+void    init_s_map(t_map *map);
+void    init_s_player(t_player *player);
+void    init_s_textures(t_texture *text);
+void    init_s_general(t_general *gen);
+//init_images.c
+void    init_img(t_general *gen, t_image *img, int width, int height);
 void    init_textures_img(t_general *gen, t_image *img, char *path);
-int *save_xmp_to_ram(t_general *gen, char *path);
-void init_textures(t_general *gen);
-void    set_color_pixel(t_image *img, int x, int y, int color);
+int     *save_xmp_to_mem(t_general *gen, char *path);
+void    init_textures(t_general *gen);
 
-//textures
-void init_textures(t_general *gen);
-void    init_texture_pixels(t_general *gen);
-void	update_texture_pixels(t_general *data, t_texture *tex, t_ray *ray, int x);
+/* PLAYER */
 
-//parse
-int check_map(t_general *gen, char **map);
-int check_file(char *file);
-
-//player
+//input_keys.c
 void    init_input_hooks(t_general *gen);
-int move_player(t_general *gen);
-int	validate_move(t_general *gen, double new_x, double new_y);
-void init_player_dir(t_player *player);
+//player_dir.c
+void    init_player_dir(t_general *gen);
+//player_move.c
+int     move_player(t_general *gen);
+//player_pos.c
+int     validate_move(t_general *gen, double new_x, double new_y);
 
-//ERROR
-int error(char *s, int code);
+/* RENDER */
 
-
-//exit
-void    clean_exit(t_general *gen, int code);
-int quit(t_general *gen);
-
-//free
-void    free_tab(void **tab);
-int     free_data(t_general *gen);
-
-//pares_utils
-int  check_blanks(char c);
-int  blank_space(char c);
-void     blank_space_map(char **file, int i, int *j);
-size_t  max_line_map(t_map *map, int i);
-
-
-//render
-void    set_frame_image_pixel(t_general *gen, t_image *img, int x, int y);
-void    render_images(t_general *gen);
+//raycasting.c
+int     raycasting(t_general *gen, t_player *player);
+//render.c
+//void    render_images(t_general *gen);
 int     render(t_general *gen);
+//textures.c
+void	update_texture_pixels(t_general *data, t_texture *text, t_ray *ray, int x);
+
+/* UTILS */
+
+//error.c
+int     error(char *detail, char *s, int code);
+int     error_msg(int detail, char *s, int code);
+//exit.c
+void    clean_exit(t_general *gen, int code);
+int     quit(t_general *gen);
+//free_data.c
+int     free_data(t_general *gen);
+void    free_tab(void **tab);
+//images_utils.c
+void    set_color_pixel(t_image *img, int x, int y, int color);
+//parse_utils.c
+int     check_blanks(char c);
+int     blank_space(char c);
+void    blank_space_map(char **file, int i, int *j);
+size_t  max_line_map(t_map *map, int i);
 
 
 #endif

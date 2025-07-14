@@ -12,21 +12,8 @@
 
 #include "../includes/general.h"
 
-/* iniciamos los valores de la struct de TEXTURA */
-void    init_text_params(t_texture *text)
-{
-    text->N = NULL;
-    text->S = NULL;
-    text->W = NULL;
-    text->E = NULL;
-    text->floor = 0;
-    text->ceiling = 0;
-    text->w_size = 64;
-    text->h_size = 64;
-}
-
 /* iniciamos los valores de la struct de IMAGEN */
-void    init_images_params(t_image *img)
+void    init_s_images(t_image *img)
 {
     img->image = NULL;
     img->addr = NULL;
@@ -35,8 +22,39 @@ void    init_images_params(t_image *img)
     img->endian = 0;
 }
 
+void    init_s_ray(t_ray *ray)
+{
+    ray->camera_x = 0;
+    ray->dir_x = 0;
+    ray->dir_y = 0;
+    ray->map_x = 0;
+    ray->map_y = 0;
+    ray->sidedist_x = 0;
+    ray->sidedist_y = 0;
+    ray->deltadist_x = 0;
+    ray->deltadist_y = 0;
+    ray->wall_dist = 0;
+    ray->wall_x = 0;
+    int     side = 0;
+    int     line_height = 0;
+    int     draw_start = 0;
+    int     draw_end = 0;
+}
+
+/*iniciamos los valores de de la struct MAP*/
+void    init_s_map(t_map *map)
+{
+    map->fd = 0;
+    map->line_count = 0;
+    map->path = NULL;
+    map->file = NULL;
+    map->height = 0;
+    map->width = 0;
+    map->end_map = 0;
+}
+
 /* iniciamos los valores de la struct de PLAYER*/
-void    init_player_params(t_player *player)
+void    init_s_player(t_player *player)
 {
     player->dir = '\0';
     player->exist = '\0';
@@ -53,7 +71,7 @@ void    init_player_params(t_player *player)
 }
 
 /* iniciamos los valores de la struct de TEXTURAS*/
-void    init_textures_params(t_texture *text)
+void    init_s_textures(t_texture *text)
 {
     text->N = NULL;
     text->S = NULL;
@@ -71,50 +89,19 @@ void    init_textures_params(t_texture *text)
     text->y = 0;
 }
 
-void    init_ray_params(t_ray *ray)
-{
-    ray->camera_x;
-    ray->dir_x;
-    ray->dir_y;
-    ray->map_x;
-    ray->map_y;
-    ray->sidedist_x;
-    ray->sidedist_y;
-    ray->deltadist_x;
-    ray->deltadist_y;
-    ray->wall_dist;
-    ray->wall_x;
-    int     side;
-    int     line_height;
-    int     draw_start;
-    int     draw_end;
-}
-
-/*iniciamos los valores de de la struct MAP*/
-void    init_map_params(t_map *map)
-{
-    map->fd = 0;
-    map->line_count = 0;
-    map->path = NULL;
-    map->file = NULL;
-    map->height = 0;
-    map->width = 0;
-    map->end_map = 0;
-}
-
 /* iniciamos los valores de la struct GENERAL */
-void    init_general(t_general *gen)
+void    init_s_general(t_general *gen)
 {
     
     gen->mlx = NULL;
     gen->win = NULL;
-    gen->win_heigth = 400;
+    gen->win_height = 400;
     gen->win_width = 600;
-    init_player_params(&gen->pl);
-    init_textures_params(&gen->text);
+    init_s_player(&gen->pl);
+    init_s_textures(&gen->text);
     gen->map = NULL;
-    init_map_params(&gen->s_map);
-    init_images_params(&gen->img);
+    init_s_map(&gen->s_map);
+    init_s_images(&gen->img);
     gen->text_pixels = NULL;
     gen->textures = NULL;
 }

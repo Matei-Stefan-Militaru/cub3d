@@ -12,31 +12,31 @@
 
 #include "../includes/general.h"
 
-void    set_frame_image_pixel(t_general *gen, t_image *img, int x, int y)
+void    paint_pixel_in_frame(t_general *gen, t_image *img, int x, int y)
 {
     if (gen->text_pixels[y][x] > 0)
         set_color_pixel(img, x, y, gen->text_pixels[y][x]);
-    else if (y < gen->win_heigth / 2)
+    else if (y < gen->win_height / 2)
         set_color_pixel(img, x, y, gen->text.hex_ceiling);
-    else if (y < gen->win_heigth - 1)
+    else if (y < gen->win_height - 1)
         set_color_pixel(img, x,y,gen->text.hex_floor);
 }
 
-static void render_frame(t_general *gen)
+static void put_frame_in_window(t_general *gen)
 {
     t_image img;
     int x;
     int y;
 
     img.image = NULL;
-    init_img(gen, &img, gen->win_width, gen->win_heigth);
+    init_img(gen, &img, gen->win_width, gen->win_height);
     y = 0;
-    while (y < gen->win_width)
+    while (y < gen->win_height)
     {
         x = 0;
         while (x < gen->win_width)
         {
-            set_frame_image_pixel(gen, &img, x, y);
+            paint_pixel_in_frame(gen, &img, x, y);
             x++;
         }
         y++;
@@ -45,25 +45,26 @@ static void render_frame(t_general *gen)
     mlx_destroy_image(gen->mlx, img.image);
 }
 
-static void render_raycast(t_general *gen)
+static void draw_raycast(t_general *gen)
 {
     init_textures_pixels(gen);
     init_ray(&gen->ray);
-    raycasting(&gen->pl, gen);
+    raycasting(&gen->player, gen);
     render_frame(gen);
-
 }
 
-void    render_images(t_general *gen)
+/*
+void    draw_images(t_general *gen)
 {
-    render_raycast(gen);
+    draw_raycast(gen);
 }
+*/
 
 int     render(t_general *gen)
 {
-    gen->pl.has_moved += move_player(gen);
-    if (gen->pl.has_moved == 0)
+    gen->player.has_moved += move_player(gen);
+    if (gen->player.has_moved == 0)
         return (0);
-    render_images(gen);
+    draw_raycast(gen);
     return (0);
 }

@@ -12,9 +12,9 @@
 
 #include "../includes/general.h"
 
-void init_player_dir(t_player *player)
+static void player_nort_south(t_player *player)
 {
-    if (player->dir == 'S')
+     if (player->dir == 'S')
     {
         player->dir_x = 0;
 		player->dir_y = 1;
@@ -28,6 +28,10 @@ void init_player_dir(t_player *player)
 		player->plane_x = 0.66;
 		player->plane_y = 0;
     }
+}
+
+static void player_east_west(t_player *player)
+{
     if  (player->dir == 'W')
     {
         player->dir_x = -1;
@@ -42,4 +46,10 @@ void init_player_dir(t_player *player)
         player->plane_x = 0;
         player->plane_y = 0.66;
     }
+}
+
+void init_player_dir(t_general *gen)
+{
+   player_nort_south(&gen->player);
+   player_east_west(&gen->player);
 }

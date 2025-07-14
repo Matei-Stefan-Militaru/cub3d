@@ -12,9 +12,29 @@
 
 #include "../includes/general.h"
 
-int error(char *s, int code)
+int error(char *detail, char *s, int code)
 {
+    ft_putstr_fd("Cub3D: Error", 2);
+    if (detail)
+    {
+         ft_putstr_fd(": ", 2);
+         ft_putstr_fd(detail, 2);
+    }
     if (s)
+    {
+        ft_ft_putstr_fd(": ", 2);
         ft_putstr_fd(s, 2);
+    }
+    ft_putstr_fd("\n", 2);
+    return (code);
+}
+
+int error_msg(int detail, char *s, int code)
+{
+    ft_putstr_fd("Cub3D: Error: ", 2);
+    ft_putnbr_fd(detail, 2);
+    ft_putstr_fd(": ", 2);
+    ft_putstr_fd(s, 2);
+    ft_putstr_fd("\n", 2);
     return (code);
 }
