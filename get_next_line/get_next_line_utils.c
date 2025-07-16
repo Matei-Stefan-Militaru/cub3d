@@ -6,13 +6,13 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 12:13:58 by pmorello          #+#    #+#             */
-/*   Updated: 2025/07/16 11:35:22 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/16 11:56:58 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static size_t	ft_strlen(char *str)
+static size_t	gnl_strlen(char *str)
 {
 	size_t	i;
 
@@ -59,7 +59,7 @@ char	*gnl_strjoin(char *buffer, char *new_buffer)
 	}
 	if (!new_buffer)
 		return (free(new_buffer), new_buffer = NULL, NULL);
-	i = ft_strlen(buffer) + ft_strlen(new_buffer);
+	i = gnl_strlen(buffer) + gnl_strlen(new_buffer);
 	sumar_buffer = (char *)malloc(sizeof(char) * (i + 1));
 	if (!sumar_buffer)
 		return (free(buffer), buffer = NULL, NULL);
@@ -73,7 +73,7 @@ char	*gnl_strjoin(char *buffer, char *new_buffer)
 	return (free(buffer), sumar_buffer);
 }
 
-char	*ft_read_line(char *buffer)
+char	*gnl_read_line(char *buffer)
 {
 	size_t	i;
 	char	*line;
@@ -98,7 +98,7 @@ char	*ft_read_line(char *buffer)
 	return (line);
 }
 
-char	*ft_new_line(char *buffer)
+char	*gnl_new_line(char *buffer)
 {
 	size_t	i;
 	size_t	j;
@@ -109,7 +109,7 @@ char	*ft_new_line(char *buffer)
 		i++;
 	if (!buffer[i])
 		return (free(buffer), buffer = NULL, NULL);
-	new_line = malloc(sizeof(char) * (ft_strlen(buffer) + 1));
+	new_line = malloc(sizeof(char) * (gnl_strlen(buffer) + 1));
 	if (!new_line)
 		return (free(buffer), buffer = NULL, NULL);
 	i++;

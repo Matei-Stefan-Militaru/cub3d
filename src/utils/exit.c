@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_cub3d.c                                       :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 09:56:08 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/07 09:56:09 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/16 12:48:42 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/general.h"
+
+void    n_exit(t_general *gen, int code)
+{
+    if (!gen)
+        exit(code);
+    exit(code);
+}
 
 void    clean_exit(t_general *gen, int code)
 {

@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 17:04:08 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/16 11:01:23 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/16 13:37:12 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void    init_mlx(t_general *gen)
 static int  parse(t_general *gen, char **av)
 {
     if (check_file(av[1]) == 1)
-        clean_exit(gen, 1);
+        n_exit(gen, 1);
     check_data(av[1], gen);
     if (get_file_data(gen, gen->s_map.file) == 1)
         return (free_data(gen));
@@ -42,7 +42,7 @@ int main(int argc, char **av)
 {
     t_general gen;
 
-    if (argc != 2)
+    if (argc < 1 || argc > 2)
         return (error("Usage", ERR_USAGE, 1));
     init_s_general(&gen);
     if (parse(&gen, av) != 0)

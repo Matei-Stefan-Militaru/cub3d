@@ -6,13 +6,13 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 10:54:24 by pmorello          #+#    #+#             */
-/*   Updated: 2025/07/16 11:24:27 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/16 11:50:34 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_read_fd(int fd, char *buffer)
+char	*gnl_read_fd(int fd, char *buffer)
 {
 	char	*new_buffer;
 	int		b_llegits;
@@ -43,12 +43,12 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = ft_read_fd(fd, buffer);
+	buffer = gnl_read_fd(fd, buffer);
 	if (!buffer)
 		return (free(buffer), buffer = NULL, NULL);
-	line = ft_read_line(buffer);
+	line = gnl_read_line(buffer);
 	if (!line)
 		return (free(buffer), buffer = NULL, NULL);
-	buffer = ft_new_line(buffer);
+	buffer = gnl_new_line(buffer);
 	return (line);
 }

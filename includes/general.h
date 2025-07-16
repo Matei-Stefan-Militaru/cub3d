@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 21:22:10 by pmorello          #+#    #+#             */
-/*   Updated: 2025/07/16 11:10:23 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/16 14:34:31 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 #  define O_DIRECTORY 00200000
 # endif
 
-# define ERR_USAGE "usage: ./cub3d <path/to/map.cub>"
+# define ERR_USAGE " ./cub3d <path/to/map.cub>"
 
 # define ERR_FILE_NOT_CUB "Not a .cub file"
 # define ERR_FILE_NOT_XPM "Not an .xpm file"
@@ -204,6 +204,7 @@ int     error_msg(int detail, char *s, int code);
 //exit.c
 void    clean_exit(t_general *gen, int code);
 int     quit(t_general *gen);
+void    n_exit(t_general *gen, int code);
 //free_data.c
 int     free_data(t_general *gen);
 void    free_tab(void **tab);
@@ -214,6 +215,7 @@ int     check_blanks(char c);
 int     check_blank_space(char c);
 int     check_blank_space_map(char **file, int i, int *j);
 size_t  check_biggest_line_in_the_map(t_map *map, int i);
+int     check_if_is_color(char *line, int j);
 /*------------------------------------------------------------*/
 /* PARSING */
 //parse_texture.c

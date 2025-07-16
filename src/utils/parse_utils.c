@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:12:03 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/16 10:54:36 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/16 14:34:26 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,13 @@ size_t  check_biggest_line_in_the_map(t_map *map, int i)
         i++;
     }
     return (b_len);
+}
+
+int    check_if_is_color(char *line, int j)
+{
+    while (line[j] == ' ' || line[j] == '\t')
+        j++;
+    if (line[j] == 'F' || line[j] == 'C')
+        return (1);
+    return (0);
 }

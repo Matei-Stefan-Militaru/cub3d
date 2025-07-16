@@ -1,6 +1,6 @@
 NAME		= cub3D
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -Iincludes -Imlx -Ilibft -Iget_next_line
+CFLAGS		= -Wall -Wextra -Werror -Iincludes -Imlx -Ilibft -Iget_next_line -g
 # === PATHS ===
 SRC_DIR		= src
 LIBFT_DIR	= libft
@@ -9,7 +9,7 @@ GNL_DIR     = get_next_line
 # === FILES ===
 GNL_SRC		= $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
 SRC_FILES	= $(shell find $(SRC_DIR) -name '*.c') $(GNL_SRC)
-OBJ_FILES	= $(SRC_FILES:.c=.o) $(GNL_SRC:.c=.o)
+OBJ_FILES	= $(SRC_FILES:.c=.o)
 
 LIBFT		= $(LIBFT_DIR)/libft.a
 MLX_LIB		= -L$(MLX_DIR) -lmlx -lXext -lX11

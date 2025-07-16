@@ -3,48 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   parse_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:21:46 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/14 15:21:46 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/16 15:01:16 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/general.h"
 
-static int has_non_digit(const char *str)
+static int	has_non_digit(char *line)
 {
-	int	i;
-
-    i = 0;
-	while (str[i])
+	int		i;
+	int		value;
+	i = 0;
+	while (line[i] == ' ')
+		i++;
+	while (line[i])
 	{
-		if (!ft_isdigit(str[i]))
+		if (!ft_isdigit(line[i]))
 			return (1);
 		i++;
 	}
-	return (0);
+	value = ft_atoi(&line[i]);
+	return (value);	
 }
 
-// Converteix un array de cadenes a RGB; retorna NULL si hi ha error
 static int	*convert_rgb(char **tokens)
 {
-	int	*rgb = malloc(sizeof(int) * 3);
-	int	i;
+	int		*rgb;
+	int		i;
 
+	rgb = malloc(sizeof(int) * 3);
 	if (!rgb)
 		return (NULL);
-	for (i = 0; i < 3; i++)
+	i = 0;
+	while (i < 3)
 	{
-		rgb[i] = ft_atoi(tokens[i]);
-		if (rgb[i] == -1 || has_non_digit(tokens[i]))
+		if (!has_non_digit(tokens[i]))
 		{
 			free_tab((void **)tokens);
 			free(rgb);
 			return (NULL);
 		}
+		rgb[i] = ft_atoi(tokens[i]);
+		i++;
 	}
-	free_tab((void **)tokens);
+	free((void **)tokens);
 	return (rgb);
 }
 
@@ -67,7 +72,7 @@ static int	*parse_rgb(const char *line)
 // Omple textures amb colors de sostre i terra, segons la línia del mapa
 int	fill_color_textures(t_general *gen, t_texture *text, char *line, int j)
 {
-	if (line[j + 1] && ft_isprint(line[j + 1]))
+	if (line[j + 1] && line[j + 1] != ' ' && !ft_isdigit(line[j + 1]))
 		return (error(gen->s_map.path, ERR_FLOOR_CEILING, 2));
 	if (!text->ceiling && line[j] == 'C')
 	{

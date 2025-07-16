@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:36:20 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/16 10:24:26 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/16 14:34:35 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ static char *get_text_path(char *line, int j)
     int len;
     int i;
     char *path;
-
-    path = NULL;
+    
     while (line[j] && (line[j] == ' ' || line[j]== '\t'))
         j++;
     len = j;
     while (line[len] && (line[len] != ' ' && line[len] != '\t'))
         len++;
+    path = malloc(sizeof(char) * (len - j + 1));
     if (!path)
-        return (NULL);
+        return (NULL);        
     i = 0;
     while (line[j] && (line[j] != ' ' && line[j] != '\t' && line[j] != '\n'))
         path[i++] = line[j++];
@@ -42,7 +42,7 @@ static char *get_text_path(char *line, int j)
 
 static int  fill_directions_text(t_texture *text, char *line, int j)
 {
-    if (line[j + 2]&& ft_isprint(line[j + 2]))
+    if (line[j + 2]&& !(line[j + 2] == ' ' || line[j + 2] == '\t'))
         return(2);
     if (line[j] == 'N' && line[j + 1] == 'O' && !(text->N))
         text->N = get_text_path(line, j + 2);
@@ -63,7 +63,7 @@ static int  ignore_whitespaces_get_info(t_general *gen, char **map, int i, int j
         j++;
     if (ft_isprint(map[i][j]) && !ft_isdigit(map[i][j]))
     {
-        if (map[i][j + 1] && ft_isprint(map[i][j + 1]) && !ft_isdigit(map[i][j]))
+        if (check_if_is_color(map[i], j) == 0)
         {
             if (fill_directions_text(&gen->text, map[i], j) == 2)
                 return (error(gen->s_map.path, ERR_TEX_INVALID, 1));

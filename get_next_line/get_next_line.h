@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 10:55:47 by pmorello          #+#    #+#             */
-/*   Updated: 2025/07/16 11:24:13 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/16 11:49:36 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 
 //funcins
 char	*get_next_line(int fd);
-char	*ft_read_fd(int fd, char *buffer);
-char	*ft_read_line(char *buffer);
-char	*ft_new_line(char *buffer);
+char	*gnl_read_fd(int fd, char *buffer);
+char	*gnl_read_line(char *buffer);
+char	*gnl_new_line(char *buffer);
 char    *gnl_strchr(char *buffer, int c);
 char	*gnl_strjoin(char *buffer, char *new_buffer);
 
