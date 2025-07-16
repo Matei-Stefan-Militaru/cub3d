@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 09:54:31 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/14 09:54:31 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/16 11:23:18 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,28 +86,24 @@ static void	ray_start_moving(t_general *gen, t_ray *ray)
 	}
 }
 
-static void	calculate_line_height(t_ray *ray, t_general *gen, t_player *player)
+static void calculate_line_height(t_ray *ray, t_general *gen, t_player *player)
 {
-    // Distància real fins al mur
-	if (ray->side == 0)
+    if (ray->side == 0)
         ray->wall_dist = ray->ngd_x - ray->ncd_x;
     else
         ray->wall_dist = ray->ngd_y - ray->ncd_y;
-	// Alçada de la línia projectada
-	ray->line_height = (int)(gen->win_height / ray->wall_dist);
-	// Determina on comença
-	ray->draw_start =  (ray->line_height) / 2 + gen->win_height;
-	if (ray->draw_start < 0)
+    ray->line_height = (int)(gen->win_height / ray->wall_dist);
+    ray->draw_end = (ray->line_height) / 2 + gen->win_height;
+    if (ray->draw_start < 0)
         ray->draw_start = 0;
-    //on acaba
     ray->draw_end = ray->line_height / 2 + gen->win_height / 2;
-    if (ray->draw_end >=gen->win_height)
+    if (ray->draw_end >= gen->win_height)
         ray->draw_end = gen->win_height - 1;
     if (ray->side == 0)
         ray->wall_x = player->pos_y + ray->wall_dist * ray->dir_y;
     else
         ray->wall_x = player->pos_x + ray->wall_dist * ray->dir_x;
-	ray->wall_x -= floor(ray->wall_x);
+    ray->wall_x -= floor(ray->wall_dist);
 }
 
 int raycasting(t_general *gen, t_player *player)

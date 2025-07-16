@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:31:27 by pmorello          #+#    #+#             */
-/*   Updated: 2025/07/09 19:10:13 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/16 10:52:35 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int error(char *detail, char *s, int code)
     }
     if (s)
     {
-        ft_ft_putstr_fd(": ", 2);
+        ft_putstr_fd(": ", 2);
         ft_putstr_fd(s, 2);
     }
     ft_putstr_fd("\n", 2);

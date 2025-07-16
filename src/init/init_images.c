@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 09:07:01 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/09 17:12:46 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/16 10:56:19 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void init_textures(t_general *gen)
     //reservamos espacio para un array de 5, tamaño de gen->textures    
     gen->textures = ft_calloc(5, sizeof * gen->textures);
     /* a cada array se le guardara la imagen XPM, passada a memoria */
-    gen->textures[0] = save_xmp_to_ram(gen, gen->text.N);
-    gen->textures[1] = save_xmp_to_ram(gen, gen->text.S);
-    gen->textures[2] = save_xmp_to_ram(gen, gen->text.W);
-    gen->textures[3] = save_xmp_to_ram(gen, gen->text.E);
+    gen->textures[0] = save_xmp_to_mem(gen, gen->text.N);
+    gen->textures[1] = save_xmp_to_mem(gen, gen->text.S);
+    gen->textures[2] = save_xmp_to_mem(gen, gen->text.W);
+    gen->textures[3] = save_xmp_to_mem(gen, gen->text.E);
 }

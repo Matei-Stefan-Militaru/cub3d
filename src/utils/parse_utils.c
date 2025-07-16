@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_read_map_utils.c                             :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:12:03 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/10 13:12:03 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/16 10:54:36 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int  check_blank_space(char c)
     return (1);    
 }
 
-void     check_blank_space_map(char **file, int i, int *j)
+int check_blank_space_map(char **file, int i, int *j)
 {
-    while (file[i][*j] == ' ' || file[i][*j] == '\t' || file[i][*j] == '\r' 
-        || file[i][*j] == '\v' || file[i][*j] == '\f' )
-        *j++;   
+    while (file[i][*j] == ' ' || file[i][*j] == '\t' || file[i][*j] == '\r' || file[i][*j] == '\v' || file[i][*j] == '\f' )
+        j++;   
+    return (*j);
 }
 
 size_t  check_biggest_line_in_the_map(t_map *map, int i)

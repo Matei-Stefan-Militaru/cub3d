@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:36:20 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/14 15:36:20 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/16 10:24:26 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static char *get_text_path(char *line, int j)
     int i;
     char *path;
 
+    path = NULL;
     while (line[j] && (line[j] == ' ' || line[j]== '\t'))
         j++;
     len = j;

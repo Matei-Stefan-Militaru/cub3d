@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 08:34:05 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/14 08:34:05 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/16 11:13:12 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ static void put_frame_in_window(t_general *gen)
 
 static void draw_raycast(t_general *gen)
 {
-    init_textures_pixels(gen);
-    init_ray(&gen->ray);
-    raycasting(&gen->player, gen);
-    render_frame(gen);
+    init_texture_pixels(gen);
+    init_s_ray(&gen->ray);
+    raycasting(gen, &gen->player);
+    put_frame_in_window(gen);
 }
 
 /*

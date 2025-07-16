@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 17:04:08 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/14 17:04:08 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/16 11:01:23 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int  parse(t_general *gen, char **av)
 {
     if (check_file(av[1]) == 1)
         clean_exit(gen, 1);
-    parse_data(av[1], gen);
+    check_data(av[1], gen);
     if (get_file_data(gen, gen->s_map.file) == 1)
         return (free_data(gen));
     if (check_map(gen, gen->map) == 1)
@@ -43,13 +43,13 @@ int main(int argc, char **av)
     t_general gen;
 
     if (argc != 2)
-        return (error_msg("Usage", ERR_USAGE, 1));
-    init_general(&gen);
+        return (error("Usage", ERR_USAGE, 1));
+    init_s_general(&gen);
     if (parse(&gen, av) != 0)
         exit (EXIT_FAILURE);
     init_mlx(&gen);
     init_textures(&gen);
-    render_images(&gen);
+    render(&gen);
     init_input_hooks(&gen);
     mlx_loop_hook(gen.mlx, render, &gen);
     mlx_loop(&gen);

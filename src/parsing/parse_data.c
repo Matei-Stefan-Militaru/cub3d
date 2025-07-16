@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:44:31 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/14 16:44:31 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/16 10:25:31 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	check_num_of_lines(char *path)
 	line_count = 0;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		error_msg(path, strerror(errno), errno);
+		error(path, strerror(errno), errno);
 	else
 	{
 		line = get_next_line(fd);

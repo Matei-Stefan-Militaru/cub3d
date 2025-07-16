@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 09:04:32 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/14 09:04:32 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/16 11:13:47 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	update_texture_pixels(t_general *data, t_texture *text, t_ray *ray, int x)
 	int	y;
 	int	color;
 
-	get_texture_index(data, ray);
+	get_textures_index(data, ray);
 	// Càlcul de la coordenada X de la textura
 	text->x = (int)(ray->wall_x * text->size);
 	if ((ray->side == 0 && ray->dir_x < 0) || (ray->side == 1 && ray->dir_y > 0))

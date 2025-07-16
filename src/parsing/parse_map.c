@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 09:10:31 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/09 18:31:40 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/16 10:43:38 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int  check_map_position(t_general *gen, char **map)
         if (ni < 0 || nj < 0 || map[i] == NULL || nj >= (int)ft_strlen(map[ni]))
             return (-1);
         //si la coord de ni y nj es espacio blanco, devuelve -1
-        if (blank_space(map[ni][nj] == -1))
+        if (check_blank_space(map[ni][nj] == -1))
             return (-1);
     }
     return (0);
@@ -107,7 +107,7 @@ static int  check_map_player_pos(t_general *gen, char **map)
         i++;
     }
     //comprueba si la posicion de player esta bien dentro del mapa
-    if (map_position(gen, map) == -1)
+    if (check_map_position(gen, map) == -1)
         return (error(gen->s_map.path, ERR_PLAYER_POS, 1));
     return (0);
 }
@@ -124,7 +124,7 @@ static int  check_map_end(t_map *s_map, char **map)
         j = 0;
         while (s_map->file[i][j])
         {
-            if (blank_space(map[i][j]))
+            if (check_blank_space(map[i][j]))
                 return (-1);
             j++;
         }

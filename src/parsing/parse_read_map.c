@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_read_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:09:18 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/10 13:09:18 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/16 10:51:48 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int  num_of_map_lines(t_general *gen, char **file, int i)
     while (file[i])
     {
         j = 0;
-        blank_space_map(file, i, &j);
+        check_blank_space_map(file, i, &j);
         if (file[i][j] != '1')
             break;
         i++; 
@@ -35,8 +35,8 @@ static int  fill_map(t_map *map, char **n_map, int index)
     int i;
     int j;
 
-    map->width = biggest_line_in_the_map(map, i);
     i = 0;
+    map->width = check_biggest_line_in_the_map(map, i);
     while (i < map->height)
     {
         j = 0;
@@ -77,10 +77,10 @@ static void change_space_into_wall(t_general *gen)
     while (gen->map[i])
     {
         j = 0;
-        blank_space_map(gen->map, i, &j);
+        check_blank_space_map(gen->map, i, &j);
         while (gen->map[i][++j])
         {
-            if (gen->map[i][j] == ' ' && j < ft_strlen(gen->map[i]) - 1);
+            if (gen->map[i][j] == ' ' && j < (int)ft_strlen(gen->map[i]) - 1)
                 gen->map[i][j] = '1';
         }
         i++;

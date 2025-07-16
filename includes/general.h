@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 21:22:10 by pmorello          #+#    #+#             */
-/*   Updated: 2025/07/09 19:04:39 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/16 11:10:23 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 
 #include "../libft/libft.h"
 #include "../mlx/mlx.h"
+#include "../get_next_line/get_next_line.h"
 #include <stdlib.h>
+#include <string.h>
+#include <errno.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <X11/keysym.h>
@@ -23,6 +26,7 @@
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <fcntl.h>
+#include <math.h>
 
 # ifndef O_DIRECTORY
 #  define O_DIRECTORY 00200000
@@ -112,8 +116,7 @@ typedef struct s_texture
     double  pos; //indica en que PIXEL de la TEXTURA esta, cuando se dibuja´
     int     index;
     double  step;
-    double  pos;
-    
+        
     int x; //coordenada dentro de la TEXTURA, para saber que PIXEL acceder
     int y; //coordenada dentro de la TEXTURA, para saber que PIXEL acceder
 
@@ -191,6 +194,7 @@ int     raycasting(t_general *gen, t_player *player);
 //void    render_images(t_general *gen);
 int     render(t_general *gen);
 //textures.c
+void    init_texture_pixels(t_general *gen);
 void	update_texture_pixels(t_general *data, t_texture *text, t_ray *ray, int x);
 /*----------------------------------------------------------------------------------*/
 /* UTILS */
@@ -208,7 +212,7 @@ void    set_color_pixel(t_image *img, int x, int y, int color);
 //parse_utils.c
 int     check_blanks(char c);
 int     check_blank_space(char c);
-void    check_blank_space_map(char **file, int i, int *j);
+int     check_blank_space_map(char **file, int i, int *j);
 size_t  check_biggest_line_in_the_map(t_map *map, int i);
 /*------------------------------------------------------------*/
 /* PARSING */
@@ -226,5 +230,6 @@ int     fill_color_textures(t_general *gen, t_texture *text, char *line, int j);
 int     check_file(char *file);
 //get_data.c
 int     get_file_data(t_general *gen, char **map);
+
 
 #endif

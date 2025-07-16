@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 18:34:45 by pmorello          #+#    #+#             */
-/*   Updated: 2025/07/09 19:04:27 by pmorello         ###   ########.fr       */
+/*   Updated: 2025/07/16 11:37:26 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static int  is_cub_file(char *file)
     return (0);
 }
 
+/*
 static int  is_xpm_file(char *file)
 {
     size_t len;
@@ -45,7 +46,7 @@ static int  is_xpm_file(char *file)
     if (len < 4 || ft_strncmp(file + len - 4, ".xpm", 4) == 0)
         return (-1);
     return (0);
-}
+}*/
 
 int     check_file(char *file)
 {
@@ -59,7 +60,5 @@ int     check_file(char *file)
     close (fd);
     if (!is_cub_file(file))
         return (error(file, ERR_FILE_NOT_CUB, 1));
-    if (!is_xpm_file(file))
-        return (error(file, ERR_FILE_NOT_XPM, 1));
     return (0);
 }

@@ -29,16 +29,16 @@ void    init_s_ray(t_ray *ray)
     ray->dir_y = 0;
     ray->map_x = 0;
     ray->map_y = 0;
-    ray->sidedist_x = 0;
-    ray->sidedist_y = 0;
-    ray->deltadist_x = 0;
-    ray->deltadist_y = 0;
+    ray->ngd_x = 0;
+    ray->ngd_y = 0;
+    ray->ncd_x = 0;
+    ray->ncd_y = 0;
     ray->wall_dist = 0;
     ray->wall_x = 0;
-    int     side = 0;
-    int     line_height = 0;
-    int     draw_start = 0;
-    int     draw_end = 0;
+    ray->side = 0;
+    ray->line_height = 0;
+    ray->draw_start = 0;
+    ray->draw_end = 0;
 }
 
 /*iniciamos los valores de de la struct MAP*/
@@ -97,7 +97,7 @@ void    init_s_general(t_general *gen)
     gen->win = NULL;
     gen->win_height = 400;
     gen->win_width = 600;
-    init_s_player(&gen->pl);
+    init_s_player(&gen->player);
     init_s_textures(&gen->text);
     gen->map = NULL;
     init_s_map(&gen->s_map);
